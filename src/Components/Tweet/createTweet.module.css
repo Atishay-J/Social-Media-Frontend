@@ -1,0 +1,24 @@
+.createTweetContainer {
+  width: 80%;
+  border: 1px solid gray;
+  display: flex;
+  justify-content: space-around;
+  border-radius: 20px;
+  margin: auto;
+  margin-top: 1.5rem;
+  align-items: center;
+  padding: 1rem 0rem 1rem 0rem;
+}
+.userAvatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  align-self: flex-start;
+}
+.editorStyle {
+  /* background: rgb(128, 28, 28); */
+  color: rgb(190, 20, 20);
+  width: 80%;
+}
+.hashtag {
+  color: #ee7320;
+}
