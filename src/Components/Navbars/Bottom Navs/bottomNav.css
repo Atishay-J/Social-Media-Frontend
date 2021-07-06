@@ -1,0 +1,13 @@
+.bottomNavContainer {
+  background: rgb(212, 187, 187);
+  padding: 0.5rem 0.8rem 0.5rem 0.8rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+.bottomNavContainerItems {
+  font-size: 1.2rem;
+}

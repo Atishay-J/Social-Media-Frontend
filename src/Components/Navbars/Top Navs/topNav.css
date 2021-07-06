@@ -1,0 +1,16 @@
+.topNavContainer {
+  background: rgb(163, 163, 163);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+}
+.topNavMenuBtn {
+  font-size: 1.4rem;
+}
+.topNavUserAvatar {
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50px;
+  border: 1px solid rgb(8, 15, 122);
+}

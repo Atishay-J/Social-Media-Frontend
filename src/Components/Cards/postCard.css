@@ -1,0 +1,49 @@
+.postCardContainer {
+  border: 1px solid red;
+  width: 80%;
+  margin: auto;
+  margin-top: 2rem;
+  padding: 1rem;
+  border-radius: 23px;
+}
+.postUserInfoContainer {
+  display: flex;
+}
+.postUserAvatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50px;
+  border: 1px solid gray;
+}
+.postUserInfo {
+  margin-left: 0.8rem;
+}
+.postUserName {
+  font-size: 1.3rem;
+}
+.postTime {
+  font-size: 0.9rem;
+}
+.postBodyContainer {
+  margin-top: 1rem;
+}
+.postInteractionsContainer {
+  width: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1rem;
+  /* background: purple; */
+}
+.postInteraction {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.postInteractionOption {
+  font-size: 1rem;
+}
+.postInteractionNumbers {
+  font-size: 1.2rem;
+  margin-left: 0.5rem;
+}
