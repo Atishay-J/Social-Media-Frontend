@@ -1,5 +1,5 @@
 import "./postCard.css";
-import { HandThumbsUp, Chat, ArrowDownUp } from "react-bootstrap-icons";
+import { Heart, Chat, ArrowDownUp } from "react-bootstrap-icons";
 
 const PostCard = () => {
   return (
@@ -23,7 +23,7 @@ const PostCard = () => {
       </div>
       <div className="postInteractionsContainer">
         <div className="postInteraction">
-          <HandThumbsUp className="postInteractionOption" />
+          <Heart className="postInteractionOption" />
           <p className="postInteractionNumbers">23</p>
         </div>
         <div className="postInteraction">
