@@ -9,6 +9,10 @@
 .postUserInfoContainer {
   display: flex;
 }
+.postBodyContainer {
+  color: var(--font-Color);
+  white-space: pre-line;
+}
 .postUserAvatar {
   width: 2.5rem;
   height: 2.5rem;

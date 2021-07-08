@@ -1,16 +1,32 @@
 .createTweetContainer {
   width: 80%;
   border: 1px solid gray;
-  display: flex;
-  justify-content: space-around;
   border-radius: 20px;
   margin: auto;
   margin-top: 1.5rem;
-  align-items: center;
   padding: 1rem 0rem 1rem 0rem;
+  display: flex;
+  flex-direction: column;
+}
+.createTweetWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
 .userAvatar {
   width: 2.5rem;
   height: 2.5rem;
   align-self: flex-start;
+}
+.tweetButton {
+  border: none;
+  width: 4rem;
+  height: 1.8rem;
+  border-radius: 20px;
+  background: rgb(4, 100, 226);
+  color: rgb(247, 245, 241);
+  cursor: pointer;
+  align-self: flex-end;
+  justify-self: flex-end;
+  margin-right: 1rem;
 }

@@ -1,7 +1,7 @@
 import "./postCard.css";
 import { Heart, Chat, ArrowDownUp } from "react-bootstrap-icons";
 
-const PostCard = () => {
+const PostCard = ({ userName }) => {
   return (
     <div className="postCardContainer">
       <div className="postUserInfoContainer">
@@ -11,7 +11,7 @@ const PostCard = () => {
           className="postUserAvatar"
         />
         <div className="postUserInfo">
-          <h1 className="postUserName">Alex</h1>
+          <h1 className="postUserName">{userName}</h1>
           <span className="postTime">6 hours ago</span>
         </div>
       </div>

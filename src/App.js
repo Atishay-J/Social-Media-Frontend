@@ -1,15 +1,18 @@
 import "./App.css";
-import TopNav from "./Components/Navbars/Top Navs/TopNav";
-import BottomNav from "./Components/Navbars/Bottom Navs/BottomNav";
-import PostCard from "./Components/Cards/PostCard";
-import CreateTweet from "./Components/Tweet/CreateTweet";
+import { Homepage, NotFound, SignIn, SignUp } from "./Components";
+import PrivateRoute from "./Components/PrivateRoute";
+import { Routes, Route } from "react-router-dom";
+
 function App() {
   return (
     <div className="App">
-      <TopNav />
-      <CreateTweet />
-      <PostCard />
-      <BottomNav />
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+        <Route path="/signin" element={<SignIn />} />
+        <Route path="/signup" element={<SignUp />} />
+        {/* <PrivateRoute path="/signup" element={<SignUp />} /> */}
+        <Route path="*" element={<NotFound />} />
+      </Routes>
     </div>
   );
 }
