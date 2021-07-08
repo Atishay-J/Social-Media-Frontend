@@ -1,24 +1,43 @@
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { signIn } from "../../features/auth/authSlice";
+import axios from "axios";
 
 const SignIn = () => {
-  const [userInput, setUserInput] = useState({ username: "", password: "" });
+  const [userInput, setUserInput] = useState({
+    usernameOrEmail: "",
+    password: "",
+  });
 
-  const signIn = (e) => {
+  const authState = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  const signInUser = (e) => {
     e.preventDefault();
     console.log("Signed In", userInput);
+
+    console.log("Signed In State", authState);
+
+    axios
+      .post("http://localhost:8000/signin", userInput)
+      .then((res) => {
+        console.log("SignIn response from sever ", res);
+        dispatch(signIn(res.data));
+      })
+      .catch((err) => console.log("Error while signin ", err));
   };
 
   return (
     <div>
       <h1>Sign In</h1>
-      <form onSubmit={(e) => signIn(e)}>
+      <form onSubmit={(e) => signInUser(e)}>
         <input
           type="text"
-          value={userInput.username}
+          value={userInput.usernameOrEmail}
           placeholder="Username or Email"
           onChange={(e) =>
             setUserInput((prevState) => {
-              return { ...prevState, username: e.target.value };
+              return { ...prevState, usernameOrEmail: e.target.value };
             })
           }
         />
