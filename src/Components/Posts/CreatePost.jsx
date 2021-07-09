@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { EditorState } from "draft-js";
+import { EditorState, ContentState } from "draft-js";
 import PostEditor from "./Post Editor/PostEditor";
 
 import { useSelector, useDispatch } from "react-redux";
-import { createPost } from "../../features/post/postSlice";
+import { uploadPost } from "../../features/post/postSlice";
 
 import styles from "./createPost.module.css";
 
@@ -19,11 +19,19 @@ const CreatePost = () => {
 
   const dispatch = useDispatch();
 
-  const checkInputs = () => {
-    console.log("CHeck input called");
-    let postText = editorState.getCurrentContent().getPlainText();
-    // setTweetText(editorState.getCurrentContent().getPlainText());
-    dispatch(createPost(postText));
+  const createPost = () => {
+    console.log("create post called");
+    let postContent = editorState.getCurrentContent().getPlainText();
+
+    console.log("UserDAta ki Id", userData.username);
+    let username = userData.username;
+    dispatch(uploadPost({ postContent, username }));
+
+    const newEditorState = EditorState.push(
+      editorState,
+      ContentState.createFromText("")
+    );
+    setEditorState(newEditorState);
   };
 
   useEffect(() => {
@@ -45,7 +53,7 @@ const CreatePost = () => {
         />
         <PostEditor editorState={editorState} setEditorState={setEditorState} />
       </div>
-      <button className={styles.postButton} onClick={checkInputs}>
+      <button className={styles.postButton} onClick={createPost}>
         Post
       </button>
     </div>
