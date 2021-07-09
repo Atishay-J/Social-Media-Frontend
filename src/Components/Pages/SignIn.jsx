@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { signIn } from "../../features/auth/authSlice";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const SignIn = () => {
@@ -11,6 +12,7 @@ const SignIn = () => {
 
   const authState = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  let navigate = useNavigate();
 
   const signInUser = (e) => {
     e.preventDefault();
@@ -21,8 +23,9 @@ const SignIn = () => {
     axios
       .post("http://localhost:8000/signin", userInput)
       .then((res) => {
-        console.log("SignIn response from sever ", res);
+        console.log("SignIn response from sever ", res.data);
         dispatch(signIn(res.data));
+        navigate("/home");
       })
       .catch((err) => console.log("Error while signin ", err));
   };

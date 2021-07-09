@@ -1,7 +1,9 @@
 import { Route, Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const PrivateRoute = ({ path, ...props }) => {
-  const isUserLoggedIn = false;
+  const { isUserLoggedIn } = useSelector((state) => state.auth);
+
   return isUserLoggedIn ? (
     <Route {...props} path={path} />
   ) : (
