@@ -1,15 +1,27 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { authAxios } from "../../Utils/authAxios";
+export const uploadPost = createAsyncThunk(
+  "posts/uploadPost",
+  async ({ postContent, username }) => {
+    console.log("Upload Post called", postContent, username);
+    try {
+      const response = await authAxios.post("/createpost", {
+        postContent,
+        username,
+      });
+      console.log(" New POst Created Data", response);
+      return response.data;
+    } catch (err) {
+      console.log("Errorr aa gya bhaagooo ", err);
+      return err;
+    }
+  }
+);
 
 const initialState = {
-  value: 0,
-  posts: [
-    {
-      postId: "234Hf",
-      tweet: "hello world",
-      userId: "333444",
-      userName: "Alex",
-    },
-  ],
+  status: "idle",
+  error: null,
+  posts: [],
 };
 
 export const postSlice = createSlice({
@@ -19,6 +31,20 @@ export const postSlice = createSlice({
     createPost: (state, action) => {
       console.log("Create POst Action", state);
       state.posts = [...state.posts, { tweet: action.payload }];
+    },
+  },
+  extraReducers: {
+    [uploadPost.pending]: (state, action) => {
+      state.status = "Loading...";
+    },
+    [uploadPost.fulfilled]: (state, action) => {
+      console.log("Post ka payload ====>>", action);
+      state.posts = [...state.posts, action.payload];
+      state.status = "fulfilled";
+    },
+    [uploadPost.rejected]: (state, action) => {
+      state.status = "Error";
+      state.error = action.error;
     },
   },
 });
