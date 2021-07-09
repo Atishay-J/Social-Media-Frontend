@@ -28,17 +28,21 @@ const CreateTweet = () => {
     dispatch(increment("Hulaala"));
   };
 
-  const fetchingData = async () => {
-    const data = await authAxios
-      .post("/userdata")
-      .then((res) => console.log("RESSSS ", res))
-      .catch((err) => console.log("ERRRRRO", err.response));
-    // console.log("DDaaaaAATTTAAAA ", data);
-  };
+  // const fetchingData = async () => {
+  //   const data = await authAxios
+  //     .post("/userdata")
+  //     .then((res) => console.log("RESSSS ", res))
+  //     .catch((err) => console.log("ERRRRRO", err.response));
+  //   // console.log("DDaaaaAATTTAAAA ", data);
+  // };
 
-  useEffect(() => {
-    fetchingData();
-  }, []);
+  // useEffect(() => {
+  //   console.log("statttetetatfd ", error);
+
+  //   if (status === "idle") {
+  //     dispatch(fetchUserData());
+  //   }
+  // }, [dispatch, error, status, userData]);
 
   return (
     <div className={styles.createTweetContainer}>
