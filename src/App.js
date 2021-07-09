@@ -12,26 +12,26 @@ const Pogo = () => {
 };
 
 function App() {
-  const { userData, status, error } = useSelector((state) => state.userData);
-  const { isUserLoggedIn } = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
+  // const { userData, status, error } = useSelector((state) => state.userData);
+  // const { isUserLoggedIn } = useSelector((state) => state.auth);
+  // const dispatch = useDispatch();
 
-  useEffect(() => {
-    console.log("Is User Logged IN ", isUserLoggedIn);
-    console.log("LOcal TOken ", localStorage.getItem("userData"));
+  // useEffect(() => {
+  //   console.log("Is User Logged IN ", isUserLoggedIn);
+  //   console.log("LOcal TOken ", localStorage.getItem("userData"));
 
-    if (isUserLoggedIn) {
-      // console.log("usererr daaata ", userData);
-      // console.log("STatusss ", status);
-      // console.log("ERrrrorr ", error);
-      if (status === "idle") {
-        dispatch(fetchUserData());
-      }
-      if (error) {
-        console.log("Error Gottted ", error);
-      }
-    }
-  }, []);
+  //   if (isUserLoggedIn) {
+  //     // console.log("usererr daaata ", userData);
+  //     // console.log("STatusss ", status);
+  //     // console.log("ERrrrorr ", error);
+  //     if (status === "idle") {
+  //       dispatch(fetchUserData());
+  //     }
+  //     // if (error) {
+  //     //   console.log("Error Gottted ", error);
+  //     // }
+  //   }
+  // }, [dispatch, isUserLoggedIn, status]);
 
   return (
     <div className="App">
@@ -42,7 +42,6 @@ function App() {
         <PrivateRoute path="/home" element={<Homepage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-      {error && <h1>{error} </h1>}
     </div>
   );
 }

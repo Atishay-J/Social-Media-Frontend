@@ -5,7 +5,7 @@ const initialState = {
   posts: [
     {
       postId: "234Hf",
-      postCaption: "hello world",
+      tweet: "hello world",
       userId: "333444",
       userName: "Alex",
     },
@@ -16,14 +16,13 @@ export const postSlice = createSlice({
   name: "posts",
   initialState,
   reducers: {
-    increment: (state, action) => {
-      //   state.value += 1;
-      console.log("AAActionnn", action);
-      state.value = action.payload;
+    createPost: (state, action) => {
+      console.log("Create POst Action", state);
+      state.posts = [...state.posts, { tweet: action.payload }];
     },
   },
 });
 
-export const { increment } = postSlice.actions;
+export const { createPost } = postSlice.actions;
 
 export default postSlice.reducer;

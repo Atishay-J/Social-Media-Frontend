@@ -1,14 +1,29 @@
 import TopNav from "../Navbars/Top Navs/TopNav";
 import BottomNav from "../Navbars/Bottom Navs/BottomNav";
-import Posts from "../Posts/Posts";
-import CreateTweet from "../Tweet/CreateTweet";
+import Feed from "../Feed/Feed";
+import CreatePost from "../Posts/CreatePost";
+
+import { useEffect, useState } from "react";
+import { fetchUserData } from "../../features/User/userDataSlice";
+import { useSelector, useDispatch } from "react-redux";
+
 const Homepage = () => {
+  const { userData, status, error } = useSelector((state) => state.userData);
+  const { isUserLoggedIn } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (status === "idle") {
+      dispatch(fetchUserData());
+    }
+  }, [dispatch, status]);
   return (
     <div className="homepage">
       <TopNav />
-      <CreateTweet />
-      <Posts />
+      <CreatePost />
+      <Feed />
       <BottomNav />
+      {status === "error" && <h1>{error} </h1>}
     </div>
   );
 };

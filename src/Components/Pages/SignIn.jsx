@@ -10,6 +10,8 @@ const SignIn = () => {
     password: "",
   });
 
+  const [errorMsg, setErrorMsg] = useState();
+
   const authState = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   let navigate = useNavigate();
@@ -27,12 +29,16 @@ const SignIn = () => {
         dispatch(signIn(res.data));
         navigate("/home");
       })
-      .catch((err) => console.log("Error while signin ", err));
+      .catch((err) => {
+        console.log("Error while signin ", err.response);
+        setErrorMsg(err.response.data);
+      });
   };
 
   return (
     <div>
       <h1>Sign In</h1>
+      {errorMsg && <h3>{errorMsg}</h3>}
       <form onSubmit={(e) => signInUser(e)}>
         <input
           type="text"

@@ -1,7 +1,7 @@
 import "./postCard.css";
 import { Heart, Chat, ArrowDownUp } from "react-bootstrap-icons";
 
-const PostCard = ({ userName }) => {
+const PostCard = ({ userName, tweet }) => {
   return (
     <div className="postCardContainer">
       <div className="postUserInfoContainer">
@@ -15,12 +15,7 @@ const PostCard = ({ userName }) => {
           <span className="postTime">6 hours ago</span>
         </div>
       </div>
-      <div className="postBodyContainer">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere,
-        consequatur reiciendis! A, quia fugiat eaque, ab vitae odio voluptatum
-        impedit nostrum consequuntur magnam animi nulla maiores quaerat
-        repudiandae delectus! Voluptatum.
-      </div>
+      <div className="postBodyContainer">{tweet}</div>
       <div className="postInteractionsContainer">
         <div className="postInteraction">
           <Heart className="postInteractionOption" />

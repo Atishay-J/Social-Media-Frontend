@@ -4,11 +4,11 @@ import createHashtagPlugin from "@draft-js-plugins/hashtag";
 
 import "draft-js/dist/Draft.css";
 
-import styles from "./tweetEditor.module.css";
+import styles from "./postEditor.module.css";
 
 const hashtagPlugin = createHashtagPlugin({ theme: styles });
 
-const TweetEditor = ({ editorState, setEditorState }) => {
+const PostEditor = ({ editorState, setEditorState }) => {
   return (
     <div className={styles.editorStyle}>
       <Editor
@@ -20,4 +20,4 @@ const TweetEditor = ({ editorState, setEditorState }) => {
     </div>
   );
 };
-export default TweetEditor;
+export default PostEditor;

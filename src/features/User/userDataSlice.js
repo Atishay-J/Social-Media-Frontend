@@ -1,8 +1,15 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 import { authAxios } from "../../Utils/authAxios";
 
 export const fetchUserData = createAsyncThunk(
   "user/userData",
+  // async () => {
+  //   const response = await authAxios.post("/userdata");
+  //   console.log("REsponse from Thunk", response);
+  //   return response.data;
+  // }
+
   async (userData, { rejectWithValue }) => {
     try {
       const response = await authAxios.post("/userdata");
