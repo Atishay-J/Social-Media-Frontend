@@ -2,9 +2,14 @@ import "./postCard.css";
 import { Heart, Chat, ArrowDownUp } from "react-bootstrap-icons";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import useTimeAgo from "../../hooks/useTimeAgo";
 
-const PostCard = ({ username, tweet }) => {
+const PostCard = ({ username, tweet, postTime }) => {
   const [userData, setUserData] = useState("");
+
+  const timeAgo = useTimeAgo(postTime);
+
+  console.log("FEEEDDD Daaataaa", timeAgo);
 
   const getUserData = async () => {
     console.log("Get User DAta called", username);
@@ -32,7 +37,7 @@ const PostCard = ({ username, tweet }) => {
         />
         <div className="postUserInfo">
           <h1 className="postUserName">{userData.username}</h1>
-          <span className="postTime">6 hours ago</span>
+          <span className="postTime">{timeAgo} ago</span>
         </div>
       </div>
       <div className="postBodyContainer">{tweet}</div>

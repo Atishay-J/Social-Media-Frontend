@@ -54,7 +54,7 @@ export const postSlice = createSlice({
     },
     [uploadPost.fulfilled]: (state, action) => {
       console.log("Post ka payload ====>>", action);
-      state.posts = [...state.posts, action.payload];
+      state.posts = [action.payload, ...state.posts];
       state.status = "fulfilled";
     },
     [uploadPost.rejected]: (state, action) => {
