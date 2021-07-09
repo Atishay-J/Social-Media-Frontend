@@ -18,6 +18,21 @@ export const uploadPost = createAsyncThunk(
   }
 );
 
+export const fetchAllPosts = createAsyncThunk(
+  "posts/fetchAllPosts",
+  async () => {
+    console.log("Fetching Alll Posts");
+    try {
+      const response = await authAxios.post("/allposts");
+      console.log("Fetch Post Response ", response);
+      return response.data;
+    } catch (err) {
+      console.log("Fetch krne pr error aaya", err);
+      return err;
+    }
+  }
+);
+
 const initialState = {
   status: "idle",
   error: null,
@@ -43,6 +58,18 @@ export const postSlice = createSlice({
       state.status = "fulfilled";
     },
     [uploadPost.rejected]: (state, action) => {
+      state.status = "Error";
+      state.error = action.error;
+    },
+    [fetchAllPosts.pending]: (state, action) => {
+      state.status = "Loading...";
+    },
+    [fetchAllPosts.fulfilled]: (state, action) => {
+      console.log("Feed ka payload ====>>", action);
+      state.posts = action.payload;
+      state.status = "fulfilled";
+    },
+    [fetchAllPosts.rejected]: (state, action) => {
       state.status = "Error";
       state.error = action.error;
     },

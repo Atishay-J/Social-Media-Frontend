@@ -11,7 +11,6 @@ const CreatePost = () => {
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   );
-  const [tweetText, setTweetText] = useState();
 
   const state = useSelector((state) => state.posts);
 
@@ -20,10 +19,8 @@ const CreatePost = () => {
   const dispatch = useDispatch();
 
   const createPost = () => {
-    console.log("create post called");
     let postContent = editorState.getCurrentContent().getPlainText();
 
-    console.log("UserDAta ki Id", userData.username);
     let username = userData.username;
     dispatch(uploadPost({ postContent, username }));
 
@@ -37,11 +34,6 @@ const CreatePost = () => {
   useEffect(() => {
     console.log("State ", state);
   }, [state]);
-
-  // useEffect(() => {
-  //   console.log("Tweet Text ", tweetText);
-  //   dispatch(createPost(tweetText));
-  // }, [tweetText]);
 
   return (
     <div className={styles.createPostContainer}>
