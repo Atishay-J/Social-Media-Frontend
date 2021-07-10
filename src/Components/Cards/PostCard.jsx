@@ -1,45 +1,73 @@
 import "./postCard.css";
 import { Heart, Chat, ArrowDownUp, HeartFill } from "react-bootstrap-icons";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { authAxios } from "../../Utils/authAxios";
 import useTimeAgo from "../../hooks/useTimeAgo";
 import { useDispatch } from "react-redux";
-import { likePost } from "../../features/post/postSlice";
+import { togglePostLike } from "../../features/post/postSlice";
+import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 
-const PostCard = ({ username, tweet, postTime, postId, postLikes, avatar }) => {
+const PostCard = ({
+  postUsername,
+  tweet,
+  postTime,
+  postId,
+  postLikes,
+  avatar,
+}) => {
+  const { userData } = useSelector((state) => state.userData);
+
+  const [liked, setLiked] = useState(false);
+
   const timeAgo = useTimeAgo(postTime);
 
-  console.log("FEEEDDD Daaataaa Likes", postLikes);
+  let username = userData.username;
+
   let numberOfLikes = postLikes.length;
+
+  console.log("==== Liked By User ====", username);
 
   const dispatch = useDispatch();
 
-  const handleLike = () => {
+  const handleLike = async () => {
     console.log("clicked =====", postId);
 
-    dispatch(likePost({ postId, username }));
+    dispatch(togglePostLike({ postId, username }));
+
+    await authAxios
+      .post(`/post/togglelike`, { username: userData.username, postId })
+      .then((res) => console.log("Handle Axios Like ", res))
+      .catch((err) => console.log("Handle axios like error", err));
   };
+
+  useEffect(() => {
+    let alreadyLiked = postLikes.find((user) => user === username);
+
+    console.log("Aleready Liked ", postLikes);
+
+    alreadyLiked ? setLiked(true) : setLiked(false);
+  }, [postLikes, username]);
 
   return (
     <div className="postCardContainer">
       <div className="postUserInfoContainer">
         <img src={avatar} alt="User Avatar" className="postUserAvatar" />
         <div className="postUserInfo">
-          <h1 className="postUserName">{username}</h1>
+          <h1 className="postUsername">{postUsername}</h1>
           <span className="postTime">{timeAgo} ago</span>
         </div>
       </div>
       <div className="postBodyContainer">{tweet}</div>
       <div className="postInteractionsContainer">
         <div className="postInteraction" onClick={handleLike}>
-          {numberOfLikes > 0 ? (
+          {liked ? (
             <>
               <HeartFill className="postInteractionOption likedButton" />
-              <p className="postInteractionNumbers">{numberOfLikes}</p>
             </>
           ) : (
             <Heart className="postInteractionOption" />
           )}
+          <p className="postInteractionNumbers">{numberOfLikes}</p>
         </div>
         <div className="postInteraction">
           <Chat className="postInteractionOption" />

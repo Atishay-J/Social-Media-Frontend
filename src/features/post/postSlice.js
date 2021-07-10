@@ -44,7 +44,7 @@ export const postSlice = createSlice({
   name: "posts",
   initialState,
   reducers: {
-    likePost: (state, action) => {
+    togglePostLike: (state, action) => {
       let foundPost = state.posts.find(
         (post) => post._id === action.payload.postId
       );
@@ -54,19 +54,16 @@ export const postSlice = createSlice({
 
       if (foundPost) {
         let ifAlreadyLiked = foundPost.likes.find(
-          (like) => like.username === action.payload.username
+          (likedby) => likedby === action.payload.username
         );
         if (ifAlreadyLiked) {
           let removeLike = foundPost.likes.filter(
-            (like) => like.username !== action.payload.username
+            (likedby) => likedby !== action.payload.username
           );
 
           foundPost.likes = removeLike;
         } else {
-          foundPost.likes = [
-            ...foundPost.likes,
-            { username: action.payload.username },
-          ];
+          foundPost.likes = [...foundPost.likes, action.payload.username];
         }
       }
       console.log("Found Post ", current(foundPost));
@@ -103,6 +100,6 @@ export const postSlice = createSlice({
   },
 });
 
-export const { likePost } = postSlice.actions;
+export const { togglePostLike } = postSlice.actions;
 
 export default postSlice.reducer;
