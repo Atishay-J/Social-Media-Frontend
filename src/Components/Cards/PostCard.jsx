@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { togglePostLike } from "../../features/post/postSlice";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const PostCard = ({
   postUsername,
@@ -47,7 +48,9 @@ const PostCard = ({
       <div className="postUserInfoContainer">
         <img src={avatar} alt="User Avatar" className="postUserAvatar" />
         <div className="postUserInfo">
-          <h1 className="postUsername">{postUsername}</h1>
+          <Link to={`/profile/${postUsername}`}>
+            <h1 className="postUsername">{postUsername}</h1>
+          </Link>
           <span className="postTime">{timeAgo} ago</span>
         </div>
       </div>

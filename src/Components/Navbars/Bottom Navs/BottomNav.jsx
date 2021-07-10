@@ -2,8 +2,10 @@ import "./bottomNav.css";
 
 import { House, Search, Bell, Person } from "react-bootstrap-icons";
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const BottomNav = () => {
+  const { userData } = useSelector((state) => state.userData);
   return (
     <div className="bottomNavContainer">
       <NavLink to="/home">
@@ -16,7 +18,7 @@ const BottomNav = () => {
         <Bell className="bottomNavContainerItems" />{" "}
       </NavLink>
 
-      <NavLink to="/profile">
+      <NavLink to={`/profile/${userData.username}`}>
         <Person className="bottomNavContainerItems" />{" "}
       </NavLink>
     </div>

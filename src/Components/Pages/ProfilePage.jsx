@@ -3,14 +3,38 @@ import BottomNav from "../Navbars/Bottom Navs/BottomNav";
 import styles from "./profilePage.module.css";
 import useSortByTime from "../../hooks/useSortByTime";
 import PostCard from "../Cards/PostCard";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { authAxios } from "../../Utils/authAxios";
 
 const ProfilePage = () => {
   const { userData } = useSelector((state) => state.userData);
   const { posts } = useSelector((state) => state.posts);
 
-  const filterUserPosts = posts.filter(
-    (post) => post.username === userData.username
-  );
+  const [userProfileData, setUserProfileData] = useState("");
+
+  const { username } = useParams();
+
+  const fetchUserData = async () => {
+    try {
+      const response = await authAxios.post("/finduser", { username });
+      setUserProfileData(response.data);
+    } catch (err) {
+      console.log("Error While Setting Userdata", err);
+    }
+  };
+
+  useEffect(() => {
+    if (username === userData.username) {
+      setUserProfileData(userData);
+    }
+
+    if (username !== userData.username) {
+      fetchUserData();
+    }
+  }, []);
+
+  const filterUserPosts = posts.filter((post) => post.username === username);
   const sortedFeed = useSortByTime(filterUserPosts);
 
   return (
@@ -18,14 +42,18 @@ const ProfilePage = () => {
       <div className={styles.profileContainer}>
         <div className={styles.bannerContainer}></div>
         <div className={styles.avatarContainer}>
-          <img className={styles.avatar} src={userData.avatar} alt="Avatar" />
+          <img
+            className={styles.avatar}
+            src={userProfileData.avatar}
+            alt="Avatar"
+          />
         </div>
         <div className={styles.userInfoContainer}>
           <div className={styles.userInfo}>
             <h3 className={styles.fullName}>
-              {userData.firstname} {userData.lastname}
+              {userProfileData.firstname} {userProfileData.lastname}
             </h3>
-            <h4 className={styles.username}>@{userData.username}</h4>
+            <h4 className={styles.username}>@{userProfileData.username}</h4>
           </div>
           <div className={styles.bio}>404 bio not found</div>
           <div className={styles.followerContainer}>
