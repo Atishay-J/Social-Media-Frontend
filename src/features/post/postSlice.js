@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
 import { authAxios } from "../../Utils/authAxios";
 export const uploadPost = createAsyncThunk(
   "posts/uploadPost",
@@ -43,9 +43,35 @@ export const postSlice = createSlice({
   name: "posts",
   initialState,
   reducers: {
-    createPost: (state, action) => {
-      console.log("Create POst Action", state);
-      state.posts = [...state.posts, { tweet: action.payload }];
+    likePost: (state, action) => {
+      let foundPost = state.posts.find(
+        (post) => post._id === action.payload.postId
+      );
+      let remainingPosts = state.posts.filter(
+        (post) => post._id !== action.payload.postId
+      );
+
+      if (foundPost) {
+        let ifAlreadyLiked = foundPost.likes.find(
+          (like) => like.username === action.payload.username
+        );
+        if (ifAlreadyLiked) {
+          let removeLike = foundPost.likes.filter(
+            (like) => like.username !== action.payload.username
+          );
+
+          foundPost.likes = removeLike;
+        } else {
+          foundPost.likes = [
+            ...foundPost.likes,
+            { username: action.payload.username },
+          ];
+        }
+      }
+      console.log("Found Post ", current(foundPost));
+      let newPost = remainingPosts;
+      console.log("Remaining Post ", newPost);
+      state.posts = [...remainingPosts, foundPost];
     },
   },
   extraReducers: {
@@ -76,6 +102,6 @@ export const postSlice = createSlice({
   },
 });
 
-export const { createPost } = postSlice.actions;
+export const { likePost } = postSlice.actions;
 
 export default postSlice.reducer;

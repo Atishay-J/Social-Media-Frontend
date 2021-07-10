@@ -1,15 +1,20 @@
 import "./postCard.css";
-import { Heart, Chat, ArrowDownUp } from "react-bootstrap-icons";
+import { Heart, Chat, ArrowDownUp, HeartFill } from "react-bootstrap-icons";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import useTimeAgo from "../../hooks/useTimeAgo";
+import { useDispatch } from "react-redux";
+import { likePost } from "../../features/post/postSlice";
 
-const PostCard = ({ username, tweet, postTime }) => {
+const PostCard = ({ username, tweet, postTime, postId, postLikes }) => {
   const [userData, setUserData] = useState("");
 
   const timeAgo = useTimeAgo(postTime);
 
-  console.log("FEEEDDD Daaataaa", timeAgo);
+  console.log("FEEEDDD Daaataaa Likes", postLikes);
+  let numberOfLikes = postLikes.length;
+
+  const dispatch = useDispatch();
 
   const getUserData = async () => {
     console.log("Get User DAta called", username);
@@ -21,6 +26,12 @@ const PostCard = ({ username, tweet, postTime }) => {
         setUserData(res.data);
       })
       .catch((err) => console.log("Error fetching user on feed", err));
+  };
+
+  const handleLike = () => {
+    console.log("clicked =====", postId);
+
+    dispatch(likePost({ postId, username: userData.username }));
   };
 
   useEffect(() => {
@@ -42,9 +53,15 @@ const PostCard = ({ username, tweet, postTime }) => {
       </div>
       <div className="postBodyContainer">{tweet}</div>
       <div className="postInteractionsContainer">
-        <div className="postInteraction">
-          <Heart className="postInteractionOption" />
-          <p className="postInteractionNumbers">23</p>
+        <div className="postInteraction" onClick={handleLike}>
+          {numberOfLikes > 0 ? (
+            <>
+              <HeartFill className="postInteractionOption likedButton" />
+              <p className="postInteractionNumbers">{numberOfLikes}</p>
+            </>
+          ) : (
+            <Heart className="postInteractionOption" />
+          )}
         </div>
         <div className="postInteraction">
           <Chat className="postInteractionOption" />

@@ -43,6 +43,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 .postInteractionOption {
   font-size: 1rem;
@@ -50,4 +51,7 @@
 .postInteractionNumbers {
   font-size: 1.2rem;
   margin-left: 0.5rem;
+}
+.likedButton {
+  color: rgb(218, 9, 26);
 }

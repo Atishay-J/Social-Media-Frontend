@@ -13,17 +13,21 @@ const Feed = () => {
 
   const sortedFeed = useSortByTime(feedData.posts);
 
+  console.log("Sorted Feed ", sortedFeed);
+
   useEffect(() => {
     dispatch(fetchAllPosts());
   }, []);
 
   return (
     <div className="postsContainer">
-      {sortedFeed?.map((feedData) => (
+      {sortedFeed?.map((postData) => (
         <PostCard
-          username={feedData.username}
-          tweet={feedData.postContent}
-          postTime={feedData.createdAt}
+          username={postData.username}
+          tweet={postData.postContent}
+          postTime={postData.createdAt}
+          postId={postData._id}
+          postLikes={postData.likes}
         />
       ))}
     </div>
