@@ -6,9 +6,7 @@ import useTimeAgo from "../../hooks/useTimeAgo";
 import { useDispatch } from "react-redux";
 import { likePost } from "../../features/post/postSlice";
 
-const PostCard = ({ username, tweet, postTime, postId, postLikes }) => {
-  const [userData, setUserData] = useState("");
-
+const PostCard = ({ username, tweet, postTime, postId, postLikes, avatar }) => {
   const timeAgo = useTimeAgo(postTime);
 
   console.log("FEEEDDD Daaataaa Likes", postLikes);
@@ -16,38 +14,18 @@ const PostCard = ({ username, tweet, postTime, postId, postLikes }) => {
 
   const dispatch = useDispatch();
 
-  const getUserData = async () => {
-    console.log("Get User DAta called", username);
-    let apiURL = "http://localhost:8000/finduser";
-    await axios
-      .post(apiURL, { username })
-      .then((res) => {
-        console.log("REsssponse onf postCard ===>", res);
-        setUserData(res.data);
-      })
-      .catch((err) => console.log("Error fetching user on feed", err));
-  };
-
   const handleLike = () => {
     console.log("clicked =====", postId);
 
-    dispatch(likePost({ postId, username: userData.username }));
+    dispatch(likePost({ postId, username }));
   };
-
-  useEffect(() => {
-    getUserData();
-  }, [username]);
 
   return (
     <div className="postCardContainer">
       <div className="postUserInfoContainer">
-        <img
-          src={userData.avatar}
-          alt="User Avatar"
-          className="postUserAvatar"
-        />
+        <img src={avatar} alt="User Avatar" className="postUserAvatar" />
         <div className="postUserInfo">
-          <h1 className="postUserName">{userData.username}</h1>
+          <h1 className="postUserName">{username}</h1>
           <span className="postTime">{timeAgo} ago</span>
         </div>
       </div>

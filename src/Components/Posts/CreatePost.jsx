@@ -22,7 +22,11 @@ const CreatePost = () => {
     let postContent = editorState.getCurrentContent().getPlainText();
 
     let username = userData.username;
-    dispatch(uploadPost({ postContent, username }));
+    let avatar = userData.avatar;
+
+    console.log("Userdata on Create POst ", userData);
+
+    dispatch(uploadPost({ postContent, username, avatar }));
 
     const newEditorState = EditorState.push(
       editorState,

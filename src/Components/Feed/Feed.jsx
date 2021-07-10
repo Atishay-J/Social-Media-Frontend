@@ -24,6 +24,7 @@ const Feed = () => {
       {sortedFeed?.map((postData) => (
         <PostCard
           username={postData.username}
+          avatar={postData.avatar}
           tweet={postData.postContent}
           postTime={postData.createdAt}
           postId={postData._id}
