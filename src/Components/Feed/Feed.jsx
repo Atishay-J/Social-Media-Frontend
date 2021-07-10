@@ -23,6 +23,7 @@ const Feed = () => {
     <div className="postsContainer">
       {sortedFeed?.map((postData) => (
         <PostCard
+          key={postData._id}
           postUsername={postData.username}
           avatar={postData.avatar}
           tweet={postData.postContent}

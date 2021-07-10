@@ -66,9 +66,7 @@ export const postSlice = createSlice({
           foundPost.likes = [...foundPost.likes, action.payload.username];
         }
       }
-      console.log("Found Post ", current(foundPost));
-      let newPost = remainingPosts;
-      console.log("Remaining Post ", newPost);
+
       state.posts = [...remainingPosts, foundPost];
     },
   },
@@ -77,7 +75,6 @@ export const postSlice = createSlice({
       state.status = "Loading...";
     },
     [uploadPost.fulfilled]: (state, action) => {
-      console.log("Post ka payload ====>>", action);
       state.posts = [action.payload, ...state.posts];
       state.status = "fulfilled";
     },
@@ -89,7 +86,6 @@ export const postSlice = createSlice({
       state.status = "Loading...";
     },
     [fetchAllPosts.fulfilled]: (state, action) => {
-      console.log("Feed ka payload ====>>", action);
       state.posts = action.payload;
       state.status = "fulfilled";
     },

@@ -25,13 +25,9 @@ const PostCard = ({
 
   let numberOfLikes = postLikes.length;
 
-  console.log("==== Liked By User ====", username);
-
   const dispatch = useDispatch();
 
   const handleLike = async () => {
-    console.log("clicked =====", postId);
-
     dispatch(togglePostLike({ postId, username }));
 
     await authAxios
@@ -42,8 +38,6 @@ const PostCard = ({
 
   useEffect(() => {
     let alreadyLiked = postLikes.find((user) => user === username);
-
-    console.log("Aleready Liked ", postLikes);
 
     alreadyLiked ? setLiked(true) : setLiked(false);
   }, [postLikes, username]);

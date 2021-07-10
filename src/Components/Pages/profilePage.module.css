@@ -1,0 +1,33 @@
+.container {
+  background: rgb(231, 221, 221);
+}
+.bannerContainer {
+  height: 5rem;
+  width: 100%;
+  background: rgb(235, 203, 203);
+}
+.avatarContainer {
+  margin-top: -2rem;
+}
+.avatar {
+  width: 5rem;
+  border: 3px solid white;
+  border-radius: 50px;
+  background: rgb(230, 153, 52);
+}
+.userInfo {
+  margin-left: 1rem;
+}
+.bio {
+  margin-left: 1rem;
+  margin-top: 0.5rem;
+}
+.followerContainer {
+  display: flex;
+  background: rgb(230, 230, 227);
+}
+.following {
+  margin-left: 1rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+}

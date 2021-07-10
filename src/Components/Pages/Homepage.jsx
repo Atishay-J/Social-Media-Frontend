@@ -13,10 +13,13 @@ const Homepage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (status === "idle") {
-      dispatch(fetchUserData());
+    console.log("ISSSS UUUUSSSEERRR LLLOGGGINNN", isUserLoggedIn);
+    if (isUserLoggedIn) {
+      if (status === "idle") {
+        dispatch(fetchUserData());
+      }
     }
-  }, [dispatch, status]);
+  }, [dispatch, isUserLoggedIn, status]);
   return (
     <div className="homepage">
       <TopNav />
