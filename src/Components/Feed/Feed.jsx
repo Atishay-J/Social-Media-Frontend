@@ -5,33 +5,44 @@ import { fetchAllPosts } from "../../features/post/postSlice";
 import useSortByTime from "../../hooks/useSortByTime";
 
 const Feed = () => {
-  const feedData = useSelector((state) => state.posts);
+  const { posts, postStatus, uploadStatus } = useSelector(
+    (state) => state.posts
+  );
 
   const dispatch = useDispatch();
 
-  console.log("Feed data from feed", feedData);
+  console.log("Feed data from feed", posts);
 
-  const sortedFeed = useSortByTime(feedData.posts);
+  const sortedFeed = useSortByTime(posts);
 
   console.log("Sorted Feed ", sortedFeed);
 
   useEffect(() => {
-    dispatch(fetchAllPosts());
+    console.log("FEEEDD KKAAA STATUSSS ", postStatus);
+    if (postStatus === "idle") {
+      dispatch(fetchAllPosts());
+    }
   }, []);
 
   return (
     <div className="postsContainer">
-      {sortedFeed?.map((postData) => (
-        <PostCard
-          key={postData._id}
-          postUsername={postData.username}
-          avatar={postData.avatar}
-          tweet={postData.postContent}
-          postTime={postData.createdAt}
-          postId={postData._id}
-          postLikes={postData.likes}
-        />
-      ))}
+      {postStatus === "loading" && <h1>Loading...</h1>}
+      {uploadStatus === "loading" && <h1>Uploading...</h1>}
+      {postStatus === "fulfilled" && (
+        <>
+          {sortedFeed?.map((postData) => (
+            <PostCard
+              key={postData._id}
+              postUsername={postData.username}
+              avatar={postData.avatar}
+              tweet={postData.postContent}
+              postTime={postData.createdAt}
+              postId={postData._id}
+              postLikes={postData.likes}
+            />
+          ))}
+        </>
+      )}
     </div>
   );
 };

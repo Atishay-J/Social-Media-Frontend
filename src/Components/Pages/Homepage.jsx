@@ -4,7 +4,7 @@ import Feed from "../Feed/Feed";
 import CreatePost from "../Posts/CreatePost";
 
 import { useEffect, useState } from "react";
-import { fetchUserData } from "../../features/User/userDataSlice";
+import { fetchLoggedInUserData } from "../../features/User/userDataSlice";
 import { useSelector, useDispatch } from "react-redux";
 
 const Homepage = () => {
@@ -20,7 +20,7 @@ const Homepage = () => {
     );
     if (isUserLoggedIn && localStorage.getItem("userData")) {
       if (status === "idle") {
-        dispatch(fetchUserData());
+        dispatch(fetchLoggedInUserData());
       }
     }
   }, [dispatch, isUserLoggedIn, status]);

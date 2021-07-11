@@ -2,13 +2,8 @@ import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
 import axios from "axios";
 import { authAxios } from "../../Utils/authAxios";
 
-export const fetchUserData = createAsyncThunk(
+export const fetchLoggedInUserData = createAsyncThunk(
   "user/userData",
-  // async () => {
-  //   const response = await authAxios.post("/userdata");
-  //   console.log("REsponse from Thunk", response);
-  //   return response.data;
-  // }
 
   async (userData, { rejectWithValue }) => {
     try {
@@ -24,10 +19,6 @@ export const fetchUserData = createAsyncThunk(
       console.log("THHHRRROWIING CCAATTHH ERRORR", err);
       return rejectWithValue(err.response.data);
     }
-
-    // const response = await authAxios.post("/userdata");
-    // console.log("response ", response);
-    // return response.data;
   }
 );
 
@@ -49,20 +40,20 @@ export const userDataSlice = createSlice({
           action.payload,
         ];
       } else {
-        fetchUserData();
+        fetchLoggedInUserData();
       }
     },
   },
   extraReducers: {
-    [fetchUserData.pending]: (state, action) => {
-      state.status = "Loading...";
+    [fetchLoggedInUserData.pending]: (state, action) => {
+      state.status = "loading";
     },
-    [fetchUserData.fulfilled]: (state, action) => {
+    [fetchLoggedInUserData.fulfilled]: (state, action) => {
       state.userData = action.payload;
       console.log("Pushed Data ====> ", state.userData);
       state.status = "fulfilled";
     },
-    [fetchUserData.rejected]: (state, action) => {
+    [fetchLoggedInUserData.rejected]: (state, action) => {
       console.log("User data reducer Action ===>", action.payload);
       state.status = "error";
       state.error = action.payload.message;

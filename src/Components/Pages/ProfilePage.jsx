@@ -11,7 +11,7 @@ import { fetchAllPosts } from "../../features/post/postSlice";
 import { toggleFollow } from "../../features/User/userDataSlice";
 
 const ProfilePage = () => {
-  const { userData } = useSelector((state) => state.userData);
+  const { userData, status } = useSelector((state) => state.userData);
   const { posts } = useSelector((state) => state.posts);
 
   const [userProfileData, setUserProfileData] = useState("");
@@ -69,61 +69,72 @@ const ProfilePage = () => {
     console.log("NEW Profile State Data ", userProfileData);
   }, [userProfileData]);
 
+  useEffect(() => {
+    console.log("Satatastast ", status);
+  }, [status]);
+
   const filterUserPosts = posts.filter((post) => post.username === username);
   const sortedFeed = useSortByTime(filterUserPosts);
 
   return (
     <div className={styles.container}>
-      <div className={styles.profileContainer}>
-        <div className={styles.bannerContainer}></div>
-        <div className={styles.avatarContainer}>
-          <img
-            className={styles.avatar}
-            src={userProfileData.avatar}
-            alt="Avatar"
-          />
-        </div>
-        <div className={styles.userInfoContainer}>
-          <div className={styles.followBtnWrapper}>
-            <div className={styles.userInfo}>
-              <h3 className={styles.fullName}>
-                {userProfileData.firstname} {userProfileData.lastname}
-              </h3>
-              <h4 className={styles.username}>@{userProfileData.username}</h4>
+      {status === "loading" && <h2>Loading...</h2>}
+      {status === "fulfilled" && (
+        <>
+          <div className={styles.profileContainer}>
+            <div className={styles.bannerContainer}></div>
+            <div className={styles.avatarContainer}>
+              <img
+                className={styles.avatar}
+                src={userProfileData.avatar}
+                alt="Avatar"
+              />
             </div>
-            {username !== userData.username && (
-              <button className={styles.followBtn} onClick={addToFollow}>
-                Follow
-              </button>
-            )}
+            <div className={styles.userInfoContainer}>
+              <div className={styles.followBtnWrapper}>
+                <div className={styles.userInfo}>
+                  <h3 className={styles.fullName}>
+                    {userProfileData.firstname} {userProfileData.lastname}
+                  </h3>
+                  <h4 className={styles.username}>
+                    @{userProfileData.username}
+                  </h4>
+                </div>
+                {username !== userData.username && (
+                  <button className={styles.followBtn} onClick={addToFollow}>
+                    Follow
+                  </button>
+                )}
+              </div>
+              <div className={styles.bio}>404 bio not found</div>
+              <div className={styles.followerContainer}>
+                <h3 className={styles.following}>
+                  {" "}
+                  {userProfileData.following?.length} following
+                </h3>
+                <h3 className={styles.following}>
+                  {" "}
+                  {userProfileData.followers?.length} followers
+                </h3>
+              </div>
+            </div>
           </div>
-          <div className={styles.bio}>404 bio not found</div>
-          <div className={styles.followerContainer}>
-            <h3 className={styles.following}>
-              {" "}
-              {userProfileData.following?.length} following
-            </h3>
-            <h3 className={styles.following}>
-              {" "}
-              {userProfileData.followers?.length} followers
-            </h3>
+          <div className={styles.postsContainer}>
+            {sortedFeed.map((postData) => (
+              <PostCard
+                key={postData._id}
+                postUsername={postData.username}
+                avatar={postData.avatar}
+                tweet={postData.postContent}
+                postTime={postData.createdAt}
+                postId={postData._id}
+                postLikes={postData.likes}
+              />
+            ))}
           </div>
-        </div>
-      </div>
-      <div className={styles.postsContainer}>
-        {sortedFeed.map((postData) => (
-          <PostCard
-            key={postData._id}
-            postUsername={postData.username}
-            avatar={postData.avatar}
-            tweet={postData.postContent}
-            postTime={postData.createdAt}
-            postId={postData._id}
-            postLikes={postData.likes}
-          />
-        ))}
-      </div>
-      <BottomNav />
+          <BottomNav />
+        </>
+      )}
     </div>
   );
 };

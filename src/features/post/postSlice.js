@@ -35,7 +35,8 @@ export const fetchAllPosts = createAsyncThunk(
 );
 
 const initialState = {
-  status: "idle",
+  uploadStatus: "idle",
+  postStatus: "idle",
   error: null,
   posts: [],
 };
@@ -72,25 +73,25 @@ export const postSlice = createSlice({
   },
   extraReducers: {
     [uploadPost.pending]: (state, action) => {
-      state.status = "Loading...";
+      state.uploadStatus = "loading";
     },
     [uploadPost.fulfilled]: (state, action) => {
       state.posts = [action.payload, ...state.posts];
-      state.status = "fulfilled";
+      state.uploadStatus = "fulfilled";
     },
     [uploadPost.rejected]: (state, action) => {
-      state.status = "Error";
+      state.uploadStatus = "Error";
       state.error = action.error;
     },
     [fetchAllPosts.pending]: (state, action) => {
-      state.status = "Loading...";
+      state.postStatus = "loading";
     },
     [fetchAllPosts.fulfilled]: (state, action) => {
       state.posts = action.payload;
-      state.status = "fulfilled";
+      state.postStatus = "fulfilled";
     },
     [fetchAllPosts.rejected]: (state, action) => {
-      state.status = "Error";
+      state.postStatus = "Error";
       state.error = action.error;
     },
   },
