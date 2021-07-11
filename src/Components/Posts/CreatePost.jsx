@@ -14,17 +14,17 @@ const CreatePost = () => {
 
   const state = useSelector((state) => state.posts);
 
-  const { userData } = useSelector((state) => state.userData);
+  const { loggedInUserData } = useSelector((state) => state.userData);
 
   const dispatch = useDispatch();
 
   const createPost = () => {
     let postContent = editorState.getCurrentContent().getPlainText();
 
-    let username = userData.username;
-    let avatar = userData.avatar;
+    let username = loggedInUserData.username;
+    let avatar = loggedInUserData.avatar;
 
-    console.log("Userdata on Create POst ", userData);
+    console.log("loggedInUserData on Create POst ", loggedInUserData);
 
     dispatch(uploadPost({ postContent, username, avatar }));
 
@@ -44,7 +44,7 @@ const CreatePost = () => {
       <div className={styles.createPostWrapper}>
         <img
           className={styles.userAvatar}
-          src={userData.avatar}
+          src={loggedInUserData.avatar}
           alt="User Avatar"
         />
         <PostEditor editorState={editorState} setEditorState={setEditorState} />

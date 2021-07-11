@@ -8,7 +8,9 @@ import { fetchLoggedInUserData } from "../../features/User/userDataSlice";
 import { useSelector, useDispatch } from "react-redux";
 
 const Homepage = () => {
-  const { userData, status, error } = useSelector((state) => state.userData);
+  const { loggedInUserData, loggedInUserStatus, error } = useSelector(
+    (state) => state.userData
+  );
   const { isUserLoggedIn } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
@@ -19,20 +21,24 @@ const Homepage = () => {
       localStorage.getItem("userData")
     );
     if (isUserLoggedIn && localStorage.getItem("userData")) {
-      if (status === "idle") {
+      if (loggedInUserStatus === "idle") {
         dispatch(fetchLoggedInUserData());
       }
     }
-  }, [dispatch, isUserLoggedIn, status]);
+  }, [dispatch, isUserLoggedIn, loggedInUserStatus]);
 
   useEffect(() => {
-    console.log("UUUUUSSSERRR Data  ====>>", userData);
-  }, [userData]);
+    console.log("UUUUUSSSERRR Data  ====>>", loggedInUserData);
+  }, [loggedInUserData]);
+
+  useEffect(() => {
+    console.log("LoggedIn User Status ", loggedInUserStatus);
+  }, []);
 
   return (
     <div className="homepage">
-      {status === "loading" && <h2>Loading...</h2>}
-      {status === "fulfilled" && (
+      {loggedInUserStatus === "loading" && <h2>Loading...</h2>}
+      {loggedInUserStatus === "fulfilled" && (
         <>
           <TopNav />
           <CreatePost />
@@ -40,7 +46,7 @@ const Homepage = () => {
           <BottomNav />
         </>
       )}
-      {status === "error" && <h1>{error} </h1>}
+      {loggedInUserStatus === "error" && <h1>{error} </h1>}
     </div>
   );
 };

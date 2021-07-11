@@ -4,7 +4,7 @@ import { List } from "react-bootstrap-icons";
 import { useSelector } from "react-redux";
 
 const TopNav = () => {
-  const { userData } = useSelector((state) => state.userData);
+  const { loggedInUserData } = useSelector((state) => state.userData);
 
   return (
     <div className="topNavContainer">
@@ -13,7 +13,7 @@ const TopNav = () => {
       <div className="topNavUserProfile">
         <img
           className="topNavUserAvatar"
-          src={userData.avatar}
+          src={loggedInUserData.avatar}
           alt="User Profile"
         />
       </div>
