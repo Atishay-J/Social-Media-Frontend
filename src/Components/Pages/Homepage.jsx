@@ -13,19 +13,33 @@ const Homepage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("ISSSS UUUUSSSEERRR LLLOGGGINNN", isUserLoggedIn);
-    if (isUserLoggedIn) {
+    console.log(
+      "ISSSS UUUUSSSEERRR LLLOGGGINNN",
+      isUserLoggedIn,
+      localStorage.getItem("userData")
+    );
+    if (isUserLoggedIn && localStorage.getItem("userData")) {
       if (status === "idle") {
         dispatch(fetchUserData());
       }
     }
   }, [dispatch, isUserLoggedIn, status]);
+
+  useEffect(() => {
+    console.log("UUUUUSSSERRR Data  ====>>", userData);
+  }, [userData]);
+
   return (
     <div className="homepage">
-      <TopNav />
-      <CreatePost />
-      <Feed />
-      <BottomNav />
+      {status === "loading" && <h2>Loading...</h2>}
+      {status === "fulfilled" && (
+        <>
+          <TopNav />
+          <CreatePost />
+          <Feed />
+          <BottomNav />
+        </>
+      )}
       {status === "error" && <h1>{error} </h1>}
     </div>
   );

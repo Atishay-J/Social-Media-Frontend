@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
 import axios from "axios";
 import { authAxios } from "../../Utils/authAxios";
 
@@ -12,13 +12,16 @@ export const fetchUserData = createAsyncThunk(
 
   async (userData, { rejectWithValue }) => {
     try {
+      console.log("LOcal Value is ", localStorage.getItem("userData"));
       const response = await authAxios.post("/userdata");
       console.log("Ressssssssssss ====>>", response);
       return response.data;
     } catch (err) {
       if (!err.response) {
+        console.log("THHHRRROWIING ERRORR");
         throw err;
       }
+      console.log("THHHRRROWIING CCAATTHH ERRORR", err);
       return rejectWithValue(err.response.data);
     }
 
@@ -37,7 +40,19 @@ const initialState = {
 export const userDataSlice = createSlice({
   name: "userData",
   initialState,
-  reducers: {},
+  reducers: {
+    toggleFollow: (state, action) => {
+      console.log("Follow Slice ", action.payload, current(state));
+      if (state.userData.following) {
+        state.userData.following = [
+          ...state.userData.following,
+          action.payload,
+        ];
+      } else {
+        fetchUserData();
+      }
+    },
+  },
   extraReducers: {
     [fetchUserData.pending]: (state, action) => {
       state.status = "Loading...";
@@ -55,5 +70,5 @@ export const userDataSlice = createSlice({
     },
   },
 });
-// export const { fetchUserData } = userDataSlice.actions;
+export const { toggleFollow } = userDataSlice.actions;
 export default userDataSlice.reducer;

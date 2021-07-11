@@ -11,12 +11,12 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     signIn: (state, action) => {
-      state.isUserLoggedIn = true;
       let userData = {
-        isUserLoggedIn: state.isUserLoggedIn,
+        isUserLoggedIn: true,
         token: action.payload.token,
       };
       localStorage.setItem("userData", JSON.stringify(userData));
+      state.isUserLoggedIn = true;
     },
     signOut: (state, action) => {
       state.isUserLoggedIn = false;
