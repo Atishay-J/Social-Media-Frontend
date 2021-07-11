@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import BottomNav from "../Navbars/Bottom Navs/BottomNav";
+import TopNav from "../Navbars/Top Navs/TopNav";
 // import styles from "./profilePage.module.css";
 import useSortByTime from "../../hooks/useSortByTime";
 import PostCard from "../Cards/PostCard";
@@ -15,7 +16,9 @@ import {
 } from "../../features/User/userDataSlice";
 
 const ProfilePage = () => {
-  // const { loggedInUserdata, status } = useSelector((state) => state.userData);
+  const [userProfileData, setUserProfileData] = useState("");
+  const [showFollowBtn, setShowFollowBtn] = useState(false);
+
   const {
     loggedInUserData,
     userData,
@@ -25,32 +28,18 @@ const ProfilePage = () => {
   } = useSelector((state) => state.userData);
   const { posts } = useSelector((state) => state.posts);
 
-  const [userProfileData, setUserProfileData] = useState("");
-  const [showFollowBtn, setShowFollowBtn] = useState(false);
-
   const { username } = useParams();
   const dispatch = useDispatch();
 
-  const updateFollowOnServer = () => {
-    authAxios
-      .post("/togglefollow")
-      .then((response) => console.log("REESSS FOOOLLOOW ", response))
-      .catch((err) => console.log("RRREES ERRR FOLLOW ", err));
-  };
-
   useEffect(() => {
-    console.log("===============\n===================\n====================");
-
     if (username === loggedInUserData.username) {
       setUserProfileData(loggedInUserData);
     }
 
     if (username !== loggedInUserData.username) {
-      console.log("Orderd To Fetch User Data");
       setShowFollowBtn(true);
 
       if (userDataStatus === "idle") {
-        console.log("DIspatching becuse Idle");
         dispatch(fetchUserData(username));
       }
       setUserProfileData(userData);
@@ -67,23 +56,6 @@ const ProfilePage = () => {
     dispatch(resetUserData());
   }, [dispatch, username]);
 
-  useEffect(() => {
-    console.log("NEW Profile State Data ", userProfileData);
-  }, [userProfileData]);
-
-  useEffect(() => {
-    console.log(
-      "Satatastast ",
-      loggedInUserData,
-      "\n userDATaStatus ",
-      userDataStatus,
-      "\n loggedInStauts",
-      loggedInUserStatus,
-      "userdata ",
-      userData
-    );
-  }, [loggedInUserData, loggedInUserStatus, userData, userDataStatus]);
-
   const filterUserPosts = posts.filter((post) => post.username === username);
   const sortedFeed = useSortByTime(filterUserPosts);
 
@@ -91,6 +63,7 @@ const ProfilePage = () => {
     <div>
       {userProfileData.username ? (
         <>
+          <TopNav />
           <ProfileCard
             userProfileData={userProfileData}
             showFollowBtn={showFollowBtn}

@@ -15,25 +15,12 @@ const Homepage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log(
-      "ISSSS UUUUSSSEERRR LLLOGGGINNN",
-      isUserLoggedIn,
-      localStorage.getItem("userData")
-    );
     if (isUserLoggedIn && localStorage.getItem("userData")) {
       if (loggedInUserStatus === "idle") {
         dispatch(fetchLoggedInUserData());
       }
     }
   }, [dispatch, isUserLoggedIn, loggedInUserStatus]);
-
-  useEffect(() => {
-    console.log("UUUUUSSSERRR Data  ====>>", loggedInUserData);
-  }, [loggedInUserData]);
-
-  useEffect(() => {
-    console.log("LoggedIn User Status ", loggedInUserStatus);
-  }, []);
 
   return (
     <div className="homepage">

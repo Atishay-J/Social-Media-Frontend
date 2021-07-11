@@ -14,7 +14,7 @@ const TopNav = () => {
         <img
           className="topNavUserAvatar"
           src={loggedInUserData.avatar}
-          alt="User Profile"
+          alt="User Avatar"
         />
       </div>
     </div>

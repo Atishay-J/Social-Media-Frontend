@@ -1,5 +1,14 @@
 import styles from "./profileCard.module.css";
+import { authAxios } from "../../Utils/authAxios";
+
 const ProfileCard = ({ userProfileData, showFollowBtn }) => {
+  const updateFollowOnServer = () => {
+    authAxios
+      .post("/togglefollow")
+      .then((response) => console.log("REESSS FOOOLLOOW ", response))
+      .catch((err) => console.log("RRREES ERRR FOLLOW ", err));
+  };
+
   const addToFollow = () => {
     console.log("FOOOLLLOOWW");
     // console.log("FOOLLOO", loggedInUserData);
