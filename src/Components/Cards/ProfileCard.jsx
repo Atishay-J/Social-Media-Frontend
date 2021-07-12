@@ -4,11 +4,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { toggleFollow } from "../../features/User/userDataSlice";
 import { useEffect } from "react";
 
+import { GeoAlt } from "react-bootstrap-icons";
+
 const ProfileCard = ({
   userProfileData,
   showFollowBtn,
   loggedInUserData,
   setUserProfileData,
+  setShowUpdateProfile,
 }) => {
   const dispatch = useDispatch();
 
@@ -79,7 +82,7 @@ const ProfileCard = ({
             </h3>
             <h4 className={styles.username}>@{userProfileData.username}</h4>
           </div>
-          {showFollowBtn && (
+          {showFollowBtn ? (
             <button className={styles.followBtn} onClick={addToFollow}>
               {userProfileData.followers.find(
                 (follower) => follower === loggedInUserData.username
@@ -87,9 +90,21 @@ const ProfileCard = ({
                 ? "Following"
                 : "Follow"}
             </button>
+          ) : (
+            <button
+              className={styles.followBtn}
+              onClick={() => setShowUpdateProfile(true)}
+            >
+              Edit Profile
+            </button>
           )}
         </div>
-        <div className={styles.bio}>404 bio not found</div>
+        <div className={styles.bio}>
+          {userProfileData.bio || "My Bio is a Mystery"}
+        </div>
+        <div className={styles.location}>
+          <GeoAlt /> {userProfileData.location}
+        </div>
         <div className={styles.followerContainer}>
           <h3 className={styles.following}>
             {" "}
