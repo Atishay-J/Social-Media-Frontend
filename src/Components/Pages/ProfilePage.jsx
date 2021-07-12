@@ -95,7 +95,7 @@ const ProfilePage = () => {
                 {postStatus === "fulfilled" &&
                   sortedFeed.map((postData) => (
                     <PostCard
-                      key={postData._id}
+                      key={`${postData._id}profile`}
                       postUsername={postData.username}
                       avatar={postData.avatar}
                       post={postData.postContent}
