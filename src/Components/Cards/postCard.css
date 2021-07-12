@@ -29,6 +29,15 @@
 .postTime {
   font-size: 0.9rem;
 }
+.postImageContainer {
+  max-width: 100%;
+  border-radius: 20px;
+}
+.imageKitImage {
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+}
 .postBodyContainer {
   margin-top: 1rem;
 }

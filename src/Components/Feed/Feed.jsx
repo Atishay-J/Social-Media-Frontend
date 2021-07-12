@@ -39,6 +39,7 @@ const Feed = () => {
               postTime={postData.createdAt}
               postId={postData._id}
               postLikes={postData.likes}
+              postImg={postData.postImg}
             />
           ))}
         </>

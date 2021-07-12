@@ -8,6 +8,8 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+import { IKImage, IKContext } from "imagekitio-react";
+
 const PostCard = ({
   postUsername,
   post,
@@ -15,6 +17,7 @@ const PostCard = ({
   postId,
   postLikes,
   avatar,
+  postImg,
 }) => {
   const { userData } = useSelector((state) => state.userData);
   const [parsedPost, setParsedPost] = useState("");
@@ -47,7 +50,7 @@ const PostCard = ({
   const checkHashtags = () => {
     const rule = /([#|＃][^\s]+)/g;
 
-    let parsedPost = post.split(rule).map((e) => {
+    let parsedPost = post?.split(rule).map((e) => {
       if (e.match(rule)) {
         return <span style={{ color: "blue" }}>{e}</span>;
       }
@@ -73,6 +76,23 @@ const PostCard = ({
         </div>
       </div>
       <div className="postBodyContainer">{parsedPost}</div>
+      {postImg && (
+        <div className="postImageContainer">
+          <IKContext
+            publicKey={process.env.REACT_APP_IMAGE_KIT_PUBLIC_KEY}
+            urlEndpoint={process.env.REACT_APP_IMAGE_KIT_URL_ENDPOINT}
+            transformationPosition="path"
+            authenticationEndpoint="http://localhost:8000/uploadimage"
+          >
+            <IKImage
+              className="imageKitImage"
+              src={postImg}
+              lqip={{ active: true, quality: 20, blur: 10 }}
+            />
+          </IKContext>
+        </div>
+      )}
+
       <div className="postInteractionsContainer">
         <div className="postInteraction" onClick={handleLike}>
           {liked ? (

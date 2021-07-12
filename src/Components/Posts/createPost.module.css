@@ -18,6 +18,12 @@
   height: 2.5rem;
   align-self: flex-start;
 }
+.buttonsWrapper {
+  display: flex;
+  margin-top: 0.6rem;
+  justify-content: space-between;
+  align-items: center;
+}
 .postButton {
   border: none;
   width: 4rem;
@@ -29,4 +35,16 @@
   align-self: flex-end;
   justify-self: flex-end;
   margin-right: 1rem;
+}
+.uploadedImage {
+  width: 80%;
+  height: auto;
+  border-radius: 10px;
+  margin: auto;
+  margin-top: 2rem;
+}
+.uploadBtnIcon {
+  margin-left: 1rem;
+  font-size: 1.1rem;
+  cursor: pointer;
 }
