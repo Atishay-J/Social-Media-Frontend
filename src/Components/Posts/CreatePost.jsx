@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { uploadPost } from "../../features/post/postSlice";
 import { IKImage, IKContext, IKUpload } from "imagekitio-react";
 import { Upload } from "react-bootstrap-icons";
+import { toast } from "react-toastify";
 
 import styles from "./createPost.module.css";
 
@@ -30,17 +31,21 @@ const CreatePost = () => {
 
     console.log("loggedInUserData on Create POst ", loggedInUserData);
 
-    dispatch(
-      uploadPost({ postContent, username, avatar, postImg: imageUploadUrl })
-    );
+    if (postContent || imageUploadUrl) {
+      dispatch(
+        uploadPost({ postContent, username, avatar, postImg: imageUploadUrl })
+      );
 
-    const newEditorState = EditorState.push(
-      editorState,
-      ContentState.createFromText("")
-    );
-    setEditorState(newEditorState);
-    setImageUploadUrl("");
-    setShowUploadBtn(false);
+      const newEditorState = EditorState.push(
+        editorState,
+        ContentState.createFromText("")
+      );
+      setEditorState(newEditorState);
+      setImageUploadUrl("");
+      setShowUploadBtn(false);
+    } else {
+      toast("Post Cannot Be empty");
+    }
   };
 
   useEffect(() => {
