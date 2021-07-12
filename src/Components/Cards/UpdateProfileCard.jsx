@@ -37,8 +37,14 @@ const UpdateProfileCard = ({ setShowUpdateProfile, setUserProfileData }) => {
         bio: userInput.bio,
         location: userInput.location,
       })
-      .then((res) => console.log("Response Update profile", res))
-      .catch((err) => console.log("Error While Updating Profile", err));
+      .then((res) => {
+        console.log("Response Update profile", res);
+        toast("Profile Updated");
+      })
+      .catch((err) => {
+        console.log("Error While Updating Profile", err);
+        toast("Some Error Occured, Reload the Page");
+      });
 
     setUserProfileData((prevData) => {
       return {
@@ -54,7 +60,7 @@ const UpdateProfileCard = ({ setShowUpdateProfile, setUserProfileData }) => {
 
   return (
     <div className={styles.updateProfileContainer}>
-      <ToastContainer />
+      {/* <ToastContainer /> */}
       <h3>Edit Profile</h3>
 
       <div onClick={() => setShowUpdateProfile(false)}>

@@ -10,13 +10,14 @@ import { Link } from "react-router-dom";
 
 const PostCard = ({
   postUsername,
-  tweet,
+  post,
   postTime,
   postId,
   postLikes,
   avatar,
 }) => {
   const { userData } = useSelector((state) => state.userData);
+  const [parsedPost, setParsedPost] = useState("");
 
   const [liked, setLiked] = useState(false);
 
@@ -43,6 +44,23 @@ const PostCard = ({
     alreadyLiked ? setLiked(true) : setLiked(false);
   }, [postLikes, username]);
 
+  const checkHashtags = () => {
+    const rule = /([#|＃][^\s]+)/g;
+
+    let parsedPost = post.split(rule).map((e) => {
+      if (e.match(rule)) {
+        return <span style={{ color: "blue" }}>{e}</span>;
+      }
+      return e;
+    });
+
+    setParsedPost(parsedPost);
+  };
+
+  useEffect(() => {
+    checkHashtags();
+  }, [post]);
+
   return (
     <div className="postCardContainer">
       <div className="postUserInfoContainer">
@@ -54,7 +72,7 @@ const PostCard = ({
           <span className="postTime">{timeAgo} ago</span>
         </div>
       </div>
-      <div className="postBodyContainer">{tweet}</div>
+      <div className="postBodyContainer">{parsedPost}</div>
       <div className="postInteractionsContainer">
         <div className="postInteraction" onClick={handleLike}>
           {liked ? (

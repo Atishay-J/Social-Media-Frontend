@@ -35,7 +35,7 @@ const Feed = () => {
               key={postData._id}
               postUsername={postData.username}
               avatar={postData.avatar}
-              tweet={postData.postContent}
+              post={postData.postContent}
               postTime={postData.createdAt}
               postId={postData._id}
               postLikes={postData.likes}

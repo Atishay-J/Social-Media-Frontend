@@ -13,6 +13,7 @@ import { Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchLoggedInUserData } from "./features/User/userDataSlice";
+import { ToastContainer } from "react-toastify";
 
 const Pogo = () => {
   return <h1>Pogo</h1>;
@@ -37,6 +38,7 @@ function App() {
 
   return (
     <div className="App">
+      <ToastContainer />
       <Routes>
         <Route path="/" element={<Pogo />} />
         <Route path="/signin" element={<SignIn />} />
