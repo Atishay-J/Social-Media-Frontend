@@ -10,7 +10,7 @@
   width: 5rem;
   border: 3px solid white;
   border-radius: 50px;
-  background: rgb(230, 153, 52);
+  background: var(--avatar-Backdrop);
 }
 .followBtnWrapper {
   display: flex;

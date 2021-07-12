@@ -13,7 +13,7 @@ export const fetchLoggedInUserData = createAsyncThunk(
       return response.data;
     } catch (err) {
       if (!err.response) {
-        console.log("THHHRRROWIING ERRORR");
+        console.log("Some Problem With Database");
         throw err;
       }
       console.log("THHHRRROWIING CCAATTHH ERRORR", err);
@@ -50,10 +50,26 @@ export const userDataSlice = createSlice({
     toggleFollow: (state, action) => {
       console.log("Follow Slice ", action.payload, current(state));
       if (state.loggedInUserData.following) {
-        state.loggedInUserData.following = [
-          ...state.loggedInUserData.following,
-          action.payload,
-        ];
+        console.log("FFFFOOFFOFOFOFOFKMFOMSPDFM");
+
+        let following = state.loggedInUserData.following.find(
+          (following) => following === action.payload
+        );
+
+        if (following) {
+          console.log("REMOVE FFOOLLWING ", following);
+          let unfollow = state.loggedInUserData.following.filter(
+            (following) => following !== action.payload
+          );
+          state.loggedInUserData.following = unfollow;
+        } else {
+          console.log("ADDing TO foolowing");
+
+          state.loggedInUserData.following = [
+            ...state.loggedInUserData.following,
+            action.payload,
+          ];
+        }
       } else {
         fetchLoggedInUserData();
       }

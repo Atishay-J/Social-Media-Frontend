@@ -26,25 +26,29 @@ const ProfilePage = () => {
     userDataStatus,
     error,
   } = useSelector((state) => state.userData);
-  const { posts } = useSelector((state) => state.posts);
+  const { posts, postStatus } = useSelector((state) => state.posts);
 
   const { username } = useParams();
   const dispatch = useDispatch();
 
   useEffect(() => {
+    console.log("I am called Usereffect");
+
     if (username === loggedInUserData.username) {
       setUserProfileData(loggedInUserData);
+      setShowFollowBtn(false);
     }
 
     if (username !== loggedInUserData.username) {
       setShowFollowBtn(true);
-
+      console.log("Caaleedd MEEEEEE OUUUTTT");
       if (userDataStatus === "idle") {
+        console.log("Caaleedd MEEEEEE");
         dispatch(fetchUserData(username));
       }
       setUserProfileData(userData);
     }
-  }, [dispatch, loggedInUserData, userData, userDataStatus, username]);
+  }, [dispatch, userData, userDataStatus, username]);
 
   useEffect(() => {
     if (posts.length === 0) {
@@ -56,6 +60,10 @@ const ProfilePage = () => {
     dispatch(resetUserData());
   }, [dispatch, username]);
 
+  useEffect(() => {
+    console.log("I am changed profile page", userProfileData);
+  }, [userProfileData]);
+
   const filterUserPosts = posts.filter((post) => post.username === username);
   const sortedFeed = useSortByTime(filterUserPosts);
 
@@ -66,20 +74,25 @@ const ProfilePage = () => {
           <TopNav />
           <ProfileCard
             userProfileData={userProfileData}
+            setUserProfileData={setUserProfileData}
+            loggedInUserData={loggedInUserData}
             showFollowBtn={showFollowBtn}
           />
           <div>
-            {sortedFeed.map((postData) => (
-              <PostCard
-                key={postData._id}
-                postUsername={postData.username}
-                avatar={postData.avatar}
-                tweet={postData.postContent}
-                postTime={postData.createdAt}
-                postId={postData._id}
-                postLikes={postData.likes}
-              />
-            ))}
+            {postStatus === "loading" && <h3>Loading...</h3>}
+
+            {postStatus === "fulfilled" &&
+              sortedFeed.map((postData) => (
+                <PostCard
+                  key={postData._id}
+                  postUsername={postData.username}
+                  avatar={postData.avatar}
+                  tweet={postData.postContent}
+                  postTime={postData.createdAt}
+                  postId={postData._id}
+                  postLikes={postData.likes}
+                />
+              ))}
           </div>
           <BottomNav />
         </>

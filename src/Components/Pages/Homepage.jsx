@@ -3,24 +3,10 @@ import BottomNav from "../Navbars/Bottom Navs/BottomNav";
 import Feed from "../Feed/Feed";
 import CreatePost from "../Posts/CreatePost";
 
-import { useEffect, useState } from "react";
-import { fetchLoggedInUserData } from "../../features/User/userDataSlice";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 const Homepage = () => {
-  const { loggedInUserData, loggedInUserStatus, error } = useSelector(
-    (state) => state.userData
-  );
-  const { isUserLoggedIn } = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (isUserLoggedIn && localStorage.getItem("userData")) {
-      if (loggedInUserStatus === "idle") {
-        dispatch(fetchLoggedInUserData());
-      }
-    }
-  }, [dispatch, isUserLoggedIn, loggedInUserStatus]);
+  const { loggedInUserStatus, error } = useSelector((state) => state.userData);
 
   return (
     <div className="homepage">

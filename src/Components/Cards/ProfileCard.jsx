@@ -1,26 +1,65 @@
 import styles from "./profileCard.module.css";
 import { authAxios } from "../../Utils/authAxios";
+import { useSelector, useDispatch } from "react-redux";
+import { toggleFollow } from "../../features/User/userDataSlice";
+import { useEffect } from "react";
 
-const ProfileCard = ({ userProfileData, showFollowBtn }) => {
+const ProfileCard = ({
+  userProfileData,
+  showFollowBtn,
+  loggedInUserData,
+  setUserProfileData,
+}) => {
+  const dispatch = useDispatch();
+
   const updateFollowOnServer = () => {
     authAxios
-      .post("/togglefollow")
+      .post("/togglefollow", {
+        username: loggedInUserData.username,
+        followingTo: userProfileData.username,
+      })
       .then((response) => console.log("REESSS FOOOLLOOW ", response))
-      .catch((err) => console.log("RRREES ERRR FOLLOW ", err));
+      .catch((err) => {
+        console.log("RRREES ERRR FOLLOW ", err);
+        dispatch(toggleFollow(userProfileData.username));
+        toggleUserProfileFollower();
+      });
+  };
+
+  const toggleUserProfileFollower = () => {
+    const checkIfAlreadyFollower = userProfileData.followers.find(
+      (follower) => follower === loggedInUserData.username
+    );
+
+    if (checkIfAlreadyFollower) {
+      const removeFollowing = userProfileData.followers.filter(
+        (follower) => follower !== loggedInUserData.username
+      );
+      setUserProfileData((prevState) => {
+        return {
+          ...prevState,
+          followers: removeFollowing,
+        };
+      });
+    } else {
+      setUserProfileData((prevState) => {
+        return {
+          ...prevState,
+          followers: [...prevState.followers, loggedInUserData.username],
+        };
+      });
+    }
   };
 
   const addToFollow = () => {
-    console.log("FOOOLLLOOWW");
-    // console.log("FOOLLOO", loggedInUserData);
-    // dispatch(toggleFollow(userProfileData.username));
-    // setUserProfileData((prevState) => {
-    //   return {
-    //     ...prevState,
-    //     followers: [...prevState.followers, loggedInUserData.username],
-    //   };
-    // });
-    // updateFollowOnServer();
+    dispatch(toggleFollow(userProfileData.username));
+    toggleUserProfileFollower();
+    updateFollowOnServer();
   };
+
+  useEffect(() => {
+    console.log("Uesr profgile data chnanged", userProfileData);
+  }, [userProfileData]);
 
   return (
     <div className={styles.profileContainer}>
@@ -42,7 +81,11 @@ const ProfileCard = ({ userProfileData, showFollowBtn }) => {
           </div>
           {showFollowBtn && (
             <button className={styles.followBtn} onClick={addToFollow}>
-              Follow
+              {userProfileData.followers.find(
+                (follower) => follower === loggedInUserData.username
+              )
+                ? "Following"
+                : "Follow"}
             </button>
           )}
         </div>
