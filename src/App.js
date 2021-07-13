@@ -7,6 +7,7 @@ import {
   ProfilePage,
   SearchPage,
   NotificationPage,
+  PostPage,
 } from "./Components";
 import PrivateRoute from "./Components/PrivateRoute";
 import { Routes, Route } from "react-router-dom";
@@ -48,6 +49,7 @@ function App() {
         <PrivateRoute path="/profile/:username" element={<ProfilePage />} />
         <PrivateRoute path="/notifications" element={<NotificationPage />} />
         <PrivateRoute path="/search" element={<SearchPage />} />
+        <PrivateRoute path="/posts/:postId" element={<PostPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

@@ -5,6 +5,7 @@ import NotFound from "./Pages/NotFound";
 import ProfilePage from "./Pages/ProfilePage";
 import NotificationPage from "./Pages/NotificationPage";
 import SearchPage from "./Pages/SearchPage";
+import PostPage from "./Pages/PostPage";
 
 export {
   Homepage,
@@ -14,4 +15,5 @@ export {
   ProfilePage,
   SearchPage,
   NotificationPage,
+  PostPage,
 };

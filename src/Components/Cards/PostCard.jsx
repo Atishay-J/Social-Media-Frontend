@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { togglePostLike } from "../../features/post/postSlice";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { IKImage, IKContext } from "imagekitio-react";
 
@@ -33,15 +33,10 @@ const PostCard = ({
   let numberOfLikes = postLikes.length;
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleLike = async () => {
     dispatch(togglePostLike({ postId, postAuthorId, username, userId }));
-
-    console.log("THING SENDING IN BODY\n \n \n ", {
-      username: loggedInUserData.username,
-      postId,
-      userId,
-    });
 
     await authAxios
       .post(`/post/togglelike`, {
@@ -117,12 +112,11 @@ const PostCard = ({
           )}
           <p className="postInteractionNumbers">{numberOfLikes}</p>
         </div>
-        <div className="postInteraction">
+        <div
+          className="postInteraction"
+          onClick={() => navigate(`/posts/${postId}`)}
+        >
           <Chat className="postInteractionOption" />
-          <p className="postInteractionNumbers">23</p>
-        </div>
-        <div className="postInteraction">
-          <ArrowDownUp className="postInteractionOption" />
           <p className="postInteractionNumbers">23</p>
         </div>
       </div>
