@@ -8,6 +8,7 @@ import {
   SearchPage,
   NotificationPage,
   PostPage,
+  IndexPage,
 } from "./Components";
 import PrivateRoute from "./Components/PrivateRoute";
 import { Routes, Route } from "react-router-dom";
@@ -15,10 +16,6 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchLoggedInUserData } from "./features/User/userDataSlice";
 import { ToastContainer } from "react-toastify";
-
-const Pogo = () => {
-  return <h1>Pogo</h1>;
-};
 
 function App() {
   const { loggedInUserStatus } = useSelector((state) => state.userData);
@@ -43,7 +40,7 @@ function App() {
     <div className="App">
       <ToastContainer />
       <Routes>
-        <Route path="/" element={<Pogo />} />
+        <Route path="/" element={<IndexPage />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
         <PrivateRoute path="/home" element={<Homepage />} />

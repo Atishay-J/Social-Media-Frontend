@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -6,5 +7,9 @@
 :root {
   --hastag-Color: #2143da;
   --font-Color: #121312;
+  --font-Color-White: #f0f0f0;
+  --font-family-one: "Poppins", sans-serif;
   --avatar-Backdrop: rgb(216, 151, 11);
+  --background-black: rgb(13, 1, 14);
+  --primary-Col: rgb(180, 26, 26);
 }
