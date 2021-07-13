@@ -7,7 +7,9 @@ export const fetchLoggedInUserData = createAsyncThunk(
 
   async (userData, { rejectWithValue }) => {
     try {
-      console.log("LOcal Value is ", localStorage.getItem("userData"));
+      console.log("LOcal Value is ", localStorage.getItem("token"));
+      authAxios.defaults.headers.common["Authorization"] =
+        localStorage.getItem("token");
       const response = await authAxios.post("/userdata");
       console.log("Ressssssssssss ====>>", response);
       return response.data;

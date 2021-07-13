@@ -26,13 +26,14 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (isUserLoggedIn && localStorage.getItem("userData")) {
+    console.log("UserSTatetete", localStorage.getItem("token"));
+    if (localStorage.getItem("token")) {
       if (loggedInUserStatus === "idle") {
         console.log("FEtched LOGGEDDD IN USER DATA IN THER APPPP");
         dispatch(fetchLoggedInUserData());
       }
     }
-  }, []);
+  }, [isUserLoggedIn, loggedInUserStatus]);
 
   // useEffect(() => {
   //   console.log("Tracking Stattusss", status);
