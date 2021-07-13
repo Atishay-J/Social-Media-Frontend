@@ -12,6 +12,7 @@ import { IKImage, IKContext } from "imagekitio-react";
 
 const PostCard = ({
   postUsername,
+  postAuthorId,
   post,
   postTime,
   postId,
@@ -19,24 +20,36 @@ const PostCard = ({
   avatar,
   postImg,
 }) => {
-  const { userData } = useSelector((state) => state.userData);
+  const { loggedInUserData } = useSelector((state) => state.userData);
   const [parsedPost, setParsedPost] = useState("");
 
   const [liked, setLiked] = useState(false);
 
   const timeAgo = useTimeAgo(postTime);
 
-  let username = userData.username;
+  let username = loggedInUserData.username;
+  let userId = loggedInUserData._id;
 
   let numberOfLikes = postLikes.length;
 
   const dispatch = useDispatch();
 
   const handleLike = async () => {
-    dispatch(togglePostLike({ postId, username }));
+    dispatch(togglePostLike({ postId, postAuthorId, username, userId }));
+
+    console.log("THING SENDING IN BODY\n \n \n ", {
+      username: loggedInUserData.username,
+      postId,
+      userId,
+    });
 
     await authAxios
-      .post(`/post/togglelike`, { username: userData.username, postId })
+      .post(`/post/togglelike`, {
+        username: loggedInUserData.username,
+        postId,
+        userId,
+        postAuthorId,
+      })
       .then((res) => console.log("Handle Axios Like ", res))
       .catch((err) => console.log("Handle axios like error", err));
   };

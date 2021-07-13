@@ -19,7 +19,7 @@ const SignUp = () => {
     e.preventDefault();
     console.log("Signed Up", userInput);
     axios
-      .post("https://socialmetaphor.herokuapp.com/signup", userInput)
+      .post("http://localhost:8000/signup", userInput)
       .then((res) => {
         console.log("Response from sever ", res);
         toast("Account Created");

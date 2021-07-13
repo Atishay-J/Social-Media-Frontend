@@ -23,17 +23,26 @@ const CreatePost = () => {
 
   const dispatch = useDispatch();
 
+  console.log("LOGGEDD IINN User Dataa", loggedInUserData);
+
   const createPost = () => {
     let postContent = editorState.getCurrentContent().getPlainText();
 
     let username = loggedInUserData.username;
     let avatar = loggedInUserData.avatar;
+    let userId = loggedInUserData._id;
 
-    console.log("loggedInUserData on Create POst ", loggedInUserData);
+    console.log("loggedInUserData on Create POst ", userId);
 
     if (postContent || imageUploadUrl) {
       dispatch(
-        uploadPost({ postContent, username, avatar, postImg: imageUploadUrl })
+        uploadPost({
+          postContent,
+          username,
+          userId,
+          avatar,
+          postImg: imageUploadUrl,
+        })
       );
 
       const newEditorState = EditorState.push(

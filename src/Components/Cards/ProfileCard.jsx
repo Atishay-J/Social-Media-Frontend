@@ -3,6 +3,7 @@ import { authAxios } from "../../Utils/authAxios";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleFollow } from "../../features/User/userDataSlice";
 import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 import { GeoAlt } from "react-bootstrap-icons";
 
@@ -16,16 +17,26 @@ const ProfileCard = ({
   const dispatch = useDispatch();
 
   const updateFollowOnServer = () => {
+    console.log(
+      "Follow On Server chjjeck \n",
+      loggedInUserData,
+      "\n userDATA \n",
+      userProfileData
+    );
+
     authAxios
       .post("/togglefollow", {
         username: loggedInUserData.username,
+        userId: loggedInUserData._id,
         followingTo: userProfileData.username,
+        followingToId: userProfileData._id,
       })
       .then((response) => console.log("REESSS FOOOLLOOW ", response))
       .catch((err) => {
         console.log("RRREES ERRR FOLLOW ", err);
         dispatch(toggleFollow(userProfileData.username));
         toggleUserProfileFollower();
+        toast("Some Error Occured, Refresh the page");
       });
   };
 

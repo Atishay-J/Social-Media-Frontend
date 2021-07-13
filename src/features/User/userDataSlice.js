@@ -17,7 +17,7 @@ export const fetchLoggedInUserData = createAsyncThunk(
         throw err;
       }
       console.log("THHHRRROWIING CCAATTHH ERRORR", err);
-      return rejectWithValue(err.response.data);
+      return rejectWithValue(err.response.data || "Error Connecting to Server");
     }
   }
 );
@@ -92,7 +92,7 @@ export const userDataSlice = createSlice({
     [fetchLoggedInUserData.rejected]: (state, action) => {
       console.log("User data reducer Action ===>", action.payload);
       state.loggedInUserStatus = "error";
-      state.error = action.payload.message;
+      state.error = action.payload?.message || "Error Connecting to Server";
       // state.error = action.error.message;
     },
     [fetchUserData.pending]: (state, action) => {

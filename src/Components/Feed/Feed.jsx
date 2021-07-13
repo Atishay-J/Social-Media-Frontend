@@ -32,8 +32,9 @@ const Feed = () => {
         <>
           {sortedFeed?.map((postData) => (
             <PostCard
-              key={postData._id}
+              key={`${postData._id}post`}
               postUsername={postData.username}
+              postAuthorId={postData.userId}
               avatar={postData.avatar}
               post={postData.postContent}
               postTime={postData.createdAt}
