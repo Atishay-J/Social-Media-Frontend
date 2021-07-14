@@ -1,0 +1,50 @@
+.cardContainer {
+  margin: auto;
+  margin-top: 2rem;
+  width: 90%;
+  display: flex;
+  align-items: center;
+  padding: 0.3rem 0.3rem 0.3rem 0.8rem;
+
+  box-shadow: -1px 1px 45px -21px rgba(32, 32, 32, 0.486);
+  border-radius: 20px;
+}
+.avatarWrapper {
+  width: 3.5rem;
+  /* align-self: flex-start; */
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.avatar {
+  width: 100%;
+  border-radius: 50px;
+  border: 1px solid rgb(199, 199, 199);
+  background: var(--avatar-Backdrop);
+}
+.userInfo {
+  margin-left: 1rem;
+}
+.firstname {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+.username {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--font-Gray);
+}
+.notificationType {
+  width: 100%;
+
+  margin-top: 0.3rem;
+  font-weight: 500;
+  /* display: flex; */
+  /* background: red; */
+}
+.timeAgo {
+  font-size: 0.8rem;
+
+  color: var(--font-Gray);
+}

@@ -4,12 +4,17 @@ import BottomNav from "../Navbars/Bottom Navs/BottomNav";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import NotificationCard from "../Cards/NotificationCard";
+import TopNav from "../Navbars/Top Navs/TopNav";
+import useSortByTime from "../../hooks/useSortByTime";
 
 const NotificationPage = () => {
   const { loggedInUserData, loggedInUserStatus } = useSelector(
     (state) => state.userData
   );
-  const [notifications, setNotifications] = useState("");
+  const [notifications, setNotifications] = useState({
+    status: "idle",
+    data: "",
+  });
 
   const fetchNotifications = async () => {
     console.log(
@@ -19,11 +24,20 @@ const NotificationPage = () => {
       loggedInUserStatus
     );
 
+    setNotifications({
+      status: "loading",
+      data: "",
+    });
+
     await authAxios
       .post("/notifications", { userId: loggedInUserData._id })
       .then((res) => {
         console.log("\n\n Notificattionsg \n", res);
-        setNotifications(res.data);
+
+        setNotifications({
+          status: "fulfilled",
+          data: res.data,
+        });
       })
       .catch((err) => console.log("\n\n Notificattionsg Errorrr \n", err));
   };
@@ -39,19 +53,21 @@ const NotificationPage = () => {
 
   return (
     <div className="notificationPageContainer">
-      <h1>I am Notification Page</h1>
-      {notifications.length ? (
-        notifications.map((notification) => (
-          <NotificationCard
-            key={notification._id}
-            sourceUser={notification.sourceUser}
-            createdAt={notification.createdAt}
-            notificationType={notification.notificationType}
-          />
-        ))
-      ) : (
-        <h2>No Notifications</h2>
-      )}
+      <TopNav />
+      {notifications.status === "loading" && <h2>Loading...</h2>}
+      {notifications.status === "fulfilled" &&
+        (notifications.data.length ? (
+          notifications.data.map((notification) => (
+            <NotificationCard
+              key={notification._id}
+              sourceUser={notification.sourceUser}
+              createdAt={notification.createdAt}
+              notificationType={notification.notificationType}
+            />
+          ))
+        ) : (
+          <h2>No Notifications</h2>
+        ))}
       <BottomNav />
     </div>
   );
