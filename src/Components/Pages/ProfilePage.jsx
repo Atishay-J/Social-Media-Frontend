@@ -9,6 +9,7 @@ import UpdateProfileCard from "../Cards/UpdateProfileCard";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { authAxios } from "../../Utils/authAxios";
+import { ToastContainer, toast } from "react-toastify";
 import { fetchAllPosts } from "../../features/post/postSlice";
 import {
   toggleFollow,
@@ -72,13 +73,14 @@ const ProfilePage = () => {
 
   return (
     <div>
+      <ToastContainer />
       {showUpdateProfile ? (
         <UpdateProfileCard
           setShowUpdateProfile={setShowUpdateProfile}
           setUserProfileData={setUserProfileData}
         />
       ) : (
-        <div>
+        <div className={styles.container}>
           {userProfileData.username ? (
             <>
               <TopNav />
@@ -103,6 +105,7 @@ const ProfilePage = () => {
                       postTime={postData.createdAt}
                       postId={postData._id}
                       postLikes={postData.likes}
+                      postComments={postData.comments}
                     />
                   ))}
               </div>

@@ -3,9 +3,10 @@ import { authAxios } from "../../Utils/authAxios";
 import { ToastContainer, toast } from "react-toastify";
 import styles from "./profileCard.module.css";
 import { XCircleFill } from "react-bootstrap-icons";
+import { toastDark, toastSuccess } from "../../Utils/toastMessage";
 
 const UpdateProfileCard = ({ setShowUpdateProfile, setUserProfileData }) => {
-  const [userInput, setUserInput] = useState({
+  const [{ firstname, lastname, bio, location }, setUserInput] = useState({
     firstname: "",
     lastname: "",
     bio: "",
@@ -20,99 +21,109 @@ const UpdateProfileCard = ({ setShowUpdateProfile, setUserProfileData }) => {
     });
   };
 
-  const updateProfile = () => {
-    if (
-      (userInput.firstname &&
-        userInput.lastname &&
-        userInput.bio &&
-        userInput.location) === ""
-    ) {
-      return toast("Fields Can't be empty");
-    }
+  const updateProfile = async () => {
+    console.log(
+      "UUPPPAADD ",
+      { firstname, lastname, bio, location },
+      firstname !== "" && lastname !== "" && bio !== "" && location !== ""
+    );
 
-    authAxios
-      .post("/updateprofile", {
-        firstname: userInput.firstname,
-        lastname: userInput.lastname,
-        bio: userInput.bio,
-        location: userInput.location,
-      })
-      .then((res) => {
-        console.log("Response Update profile", res);
-        toast("Profile Updated");
-      })
-      .catch((err) => {
-        console.log("Error While Updating Profile", err);
-        toast("Some Error Occured, Reload the Page");
+    if (firstname !== "" && lastname !== "" && bio !== "" && location !== "") {
+      await authAxios
+        .post("/updateprofile", {
+          firstname,
+          lastname,
+          bio,
+          location,
+        })
+        .then((res) => {
+          console.log("Response Update profile", res);
+          toastSuccess("Profile Updated");
+        })
+        .catch((err) => {
+          console.log("Error While Updating Profile", err);
+          toastDark("Some Error Occured, Reload the Page");
+        });
+
+      setUserProfileData((prevData) => {
+        return {
+          ...prevData,
+          firstname,
+          lastname,
+          bio,
+          location,
+        };
       });
-
-    setUserProfileData((prevData) => {
-      return {
-        ...prevData,
-        firstname: userInput.firstname,
-        lastname: userInput.lastname,
-        bio: userInput.bio,
-        location: userInput.location,
-      };
-    });
-    setShowUpdateProfile(false);
+      setShowUpdateProfile(false);
+    }
+    toastDark("Fields Can't be empty");
   };
 
   return (
     <div className={styles.updateProfileContainer}>
-      {/* <ToastContainer /> */}
-      <h3>Edit Profile</h3>
+      <div className={styles.headingWrapper}>
+        <h3 className={styles.heading}>Edit Profile</h3>
 
-      <div onClick={() => setShowUpdateProfile(false)}>
-        <XCircleFill />
+        <div
+          className={styles.closeIconWrapper}
+          onClick={() => setShowUpdateProfile(false)}
+        >
+          <XCircleFill />
+        </div>
       </div>
 
-      <div className="inputPlaceholderWrapper">
-        <p>Firstname</p>
+      <div className={styles.inputPlaceholderWrapper}>
+        {/* <p className={styles.inputLabel}>Firstname</p> */}
         <input
+          className={styles.inputs}
           type="text"
-          value={userInput.firstname}
+          value={firstname}
           name="firstname"
           onChange={(event) => updateInput(event)}
           placeholder="First name"
         />
       </div>
 
-      <div className="inputPlaceholderWrapper">
-        <p>Lastname</p>
+      <div className={styles.inputPlaceholderWrapper}>
+        {/* <p className={styles.inputLabel}>Lastname</p> */}
         <input
+          className={styles.inputs}
           type="text"
-          value={userInput.lastname}
+          value={lastname}
           name="lastname"
           onChange={(event) => updateInput(event)}
           placeholder="Last name"
         />
       </div>
 
-      <div className="inputPlaceholderWrapper">
-        <p>Bio</p>
+      <div className={styles.inputPlaceholderWrapper}>
+        {/* <p className={styles.inputLabel}>Bio</p> */}
         <textarea
+          className={styles.textarea}
           placeholder="Bio"
           name="bio"
           maxLength="80"
-          value={userInput.bio}
+          value={bio}
           onChange={(event) => updateInput(event)}
         />
-        <p> {userInput.bio.length} / 80</p>
+        <p className={styles.bioCount}> {bio.length} / 80</p>
       </div>
 
-      <div className="inputPlaceholderWrapper">
-        <p>Location</p>
+      <div className={styles.inputPlaceholderWrapper}>
+        {/* <p className={styles.inputLabel}>Location</p> */}
         <input
+          className={styles.inputs}
           type="text"
-          value={userInput.location}
+          value={location}
           name="location"
           onChange={(event) => updateInput(event)}
-          placeholder="First name"
+          placeholder="Location"
         />
       </div>
 
-      <button onClick={updateProfile}>Update</button>
+      <button className={styles.updateProfileBtn} onClick={updateProfile}>
+        Update
+      </button>
     </div>
   );
 };

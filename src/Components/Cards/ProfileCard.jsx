@@ -111,10 +111,14 @@ const ProfileCard = ({
           )}
         </div>
         <div className={styles.bio}>
-          {userProfileData.bio || "My Bio is a Mystery"}
+          {userProfileData.bio || "My bio is a secret"}
         </div>
         <div className={styles.location}>
-          <GeoAlt /> {userProfileData.location}
+          <GeoAlt />
+          <span className={styles.locationText}>
+            {" "}
+            {userProfileData.location || "Somewhere on earth"}
+          </span>
         </div>
         <div className={styles.followerContainer}>
           <h3 className={styles.following}>
