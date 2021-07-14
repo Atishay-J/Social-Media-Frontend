@@ -39,6 +39,7 @@ const PostPage = () => {
   };
 
   const addComment = async () => {
+    setCommentInput("");
     setUploadComment({ status: "loading" });
     await authAxios
       .post("/post/addcomment", {
@@ -75,6 +76,8 @@ const PostPage = () => {
         <div className={styles.container}>
           <PostCard
             postUsername={postData.data.username}
+            postFirstname={postData.data.firstname}
+            postLastname={postData.data.lastname}
             postAuthorId={postData.data.userId}
             avatar={postData.data.avatar}
             post={postData.data.postContent}
@@ -89,7 +92,7 @@ const PostPage = () => {
             <textarea
               className={styles.commentArea}
               value={commentInput}
-              placeholder="comment"
+              placeholder="write a comment"
               onChange={(e) => setCommentInput(e.target.value)}
             />
             <button className={styles.commentBtn} onClick={addComment}>

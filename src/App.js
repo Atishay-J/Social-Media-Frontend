@@ -16,7 +16,8 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchLoggedInUserData } from "./features/User/userDataSlice";
 import { ToastContainer, toast } from "react-toastify";
-
+import TopNav from "./Components/Navbars/Top Navs/TopNav";
+import BottomNav from "./Components/Navbars/Bottom Navs/BottomNav";
 function App() {
   const { loggedInUserStatus } = useSelector((state) => state.userData);
   const { isUserLoggedIn } = useSelector((state) => state.auth);
@@ -39,6 +40,7 @@ function App() {
   return (
     <div className="App">
       {/* <ToastContainer /> */}
+
       <Routes>
         <Route path="/" element={<IndexPage />} />
         <Route path="/signin" element={<SignIn />} />

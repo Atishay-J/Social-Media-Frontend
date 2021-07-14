@@ -50,7 +50,9 @@ const SearchPage = () => {
 
         <div className={styles.searchResultsWrapper}>
           {searchResults.status === "idle" && (
-            <h2 className={styles.searchSuggestion}>Try searching for</h2>
+            <h2 className={styles.searchSuggestion}>
+              Try searching for "Elon"
+            </h2>
           )}
           {searchResults.status === "loading" && <h3>Loading...</h3>}
           {searchResults.status === "fulfilled" && (
@@ -64,9 +66,8 @@ const SearchPage = () => {
           )}
           {searchResults.status === "error" && <h3>User does not Exist</h3>}
         </div>
-
-        <BottomNav />
       </div>
+      <BottomNav />
     </>
   );
 };

@@ -8,18 +8,27 @@ const BottomNav = () => {
   const { loggedInUserData } = useSelector((state) => state.userData);
   return (
     <div className={styles.bottomNavContainer}>
-      <NavLink to="/home">
-        <House className={styles.bottomNavContainerItems} />
-      </NavLink>
-      <NavLink to="/search">
-        <Search className={styles.bottomNavContainerItems} />{" "}
-      </NavLink>
-      <NavLink to="/notifications">
-        <Bell className={styles.bottomNavContainerItems} />{" "}
+      <NavLink className={styles.bottomNavContainerItems} to="/home">
+        <House className={styles.bottomNavContainerIcons} />
+        <p className={styles.navlinkName}>Home</p>
       </NavLink>
 
-      <NavLink to={`/profile/${loggedInUserData.username}`}>
-        <Person className={styles.bottomNavContainerItems} />{" "}
+      <NavLink className={styles.bottomNavContainerItems} to="/search">
+        <Search className={styles.bottomNavContainerIcons} />{" "}
+        <p className={styles.navlinkName}>Search</p>
+      </NavLink>
+
+      <NavLink className={styles.bottomNavContainerItems} to="/notifications">
+        <Bell className={styles.bottomNavContainerIcons} />{" "}
+        <p className={styles.navlinkName}>Notifications</p>
+      </NavLink>
+
+      <NavLink
+        className={styles.bottomNavContainerItems}
+        to={`/profile/${loggedInUserData.username}`}
+      >
+        <Person className={styles.bottomNavContainerIcons} />{" "}
+        <p className={styles.navlinkName}>Profile</p>
       </NavLink>
     </div>
   );

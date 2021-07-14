@@ -82,3 +82,12 @@
 .likedButton {
   color: var(--primary-Col);
 }
+@media only screen and (min-width: 620px) {
+  .postCardContainer {
+    width: 70%;
+  }
+  .postInteractionsContainer {
+    width: 20%;
+    /* margin: auto; */
+  }
+}

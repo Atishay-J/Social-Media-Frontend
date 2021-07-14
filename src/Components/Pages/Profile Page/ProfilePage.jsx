@@ -84,30 +84,32 @@ const ProfilePage = () => {
           {userProfileData.username ? (
             <>
               <TopNav />
-              <ProfileCard
-                userProfileData={userProfileData}
-                setUserProfileData={setUserProfileData}
-                loggedInUserData={loggedInUserData}
-                showFollowBtn={showFollowBtn}
-                setShowUpdateProfile={setShowUpdateProfile}
-              />
-              <div>
-                {postStatus === "loading" && <h3>Loading...</h3>}
+              <div className={styles.profilePage}>
+                <ProfileCard
+                  userProfileData={userProfileData}
+                  setUserProfileData={setUserProfileData}
+                  loggedInUserData={loggedInUserData}
+                  showFollowBtn={showFollowBtn}
+                  setShowUpdateProfile={setShowUpdateProfile}
+                />
+                <div>
+                  {postStatus === "loading" && <h3>Loading...</h3>}
 
-                {postStatus === "fulfilled" &&
-                  sortedFeed.map((postData) => (
-                    <PostCard
-                      key={`${postData._id}profile`}
-                      postUsername={postData.username}
-                      avatar={postData.avatar}
-                      post={postData.postContent}
-                      postImg={postData.postImg}
-                      postTime={postData.createdAt}
-                      postId={postData._id}
-                      postLikes={postData.likes}
-                      postComments={postData.comments}
-                    />
-                  ))}
+                  {postStatus === "fulfilled" &&
+                    sortedFeed.map((postData) => (
+                      <PostCard
+                        key={`${postData._id}profile`}
+                        postUsername={postData.username}
+                        avatar={postData.avatar}
+                        post={postData.postContent}
+                        postImg={postData.postImg}
+                        postTime={postData.createdAt}
+                        postId={postData._id}
+                        postLikes={postData.likes}
+                        postComments={postData.comments}
+                      />
+                    ))}
+                </div>
               </div>
               <BottomNav />
             </>

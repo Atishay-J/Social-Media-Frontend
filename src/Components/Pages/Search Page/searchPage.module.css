@@ -3,6 +3,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
   /* background: red; */
 }
 .searchbarWrapper {
@@ -44,6 +46,14 @@
   width: 70%;
   text-align: center;
 }
+
+@media only screen and (min-width: 620px) {
+  .searchPageContainer {
+    width: 80%;
+    margin: auto;
+  }
+}
+
 /* **** SEARCH CARD **** */
 
 .searchCard {

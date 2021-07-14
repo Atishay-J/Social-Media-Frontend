@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import NotificationCard from "../Cards/NotificationCard";
 import TopNav from "../Navbars/Top Navs/TopNav";
 import useSortByTime from "../../hooks/useSortByTime";
+import styles from "./notification.module.css";
 
 const NotificationPage = () => {
   const { loggedInUserData, loggedInUserStatus } = useSelector(
@@ -56,24 +57,26 @@ const NotificationPage = () => {
   }, [loggedInUserStatus]);
 
   return (
-    <div className="notificationPageContainer">
+    <>
       <TopNav />
-      {notifications.status === "loading" && <h2>Loading...</h2>}
-      {notifications.status === "fulfilled" &&
-        (sortedByTime.length ? (
-          sortedByTime.map((notification) => (
-            <NotificationCard
-              key={notification._id}
-              sourceUser={notification.sourceUser}
-              createdAt={notification.createdAt}
-              notificationType={notification.notificationType}
-            />
-          ))
-        ) : (
-          <h2>No Notifications</h2>
-        ))}
+      <div className={styles.notificationPageContainer}>
+        {notifications.status === "loading" && <h2>Loading...</h2>}
+        {notifications.status === "fulfilled" &&
+          (sortedByTime.length ? (
+            sortedByTime.map((notification) => (
+              <NotificationCard
+                key={notification._id}
+                sourceUser={notification.sourceUser}
+                createdAt={notification.createdAt}
+                notificationType={notification.notificationType}
+              />
+            ))
+          ) : (
+            <h2>No Notifications</h2>
+          ))}
+      </div>
       <BottomNav />
-    </div>
+    </>
   );
 };
 export default NotificationPage;

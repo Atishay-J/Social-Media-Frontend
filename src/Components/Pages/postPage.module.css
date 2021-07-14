@@ -3,6 +3,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-top: 5rem;
   padding-bottom: 5rem;
 }
 .commentWrapper {
@@ -44,6 +45,7 @@
   /* background: transparent; */
   color: var(--font-Color-White);
   border-radius: 20px 20px 20px 20px;
+  cursor: pointer;
 }
 .message {
   font-size: 1rem;
@@ -52,4 +54,15 @@
 }
 .allComments {
   width: 80%;
+}
+
+@media only screen and (min-width: 620px) {
+  .container {
+    width: 70%;
+    margin: auto;
+  }
+  .commentWrapper {
+    /* width: 70%; */
+    /* background: red; */
+  }
 }
