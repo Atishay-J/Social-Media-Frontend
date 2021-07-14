@@ -16,6 +16,10 @@ const NotificationPage = () => {
     data: "",
   });
 
+  const sortedByTime = useSortByTime(notifications.data);
+
+  console.log("Runned againn ", sortedByTime);
+
   const fetchNotifications = async () => {
     console.log(
       "Usererrr IDDDDD",
@@ -56,8 +60,8 @@ const NotificationPage = () => {
       <TopNav />
       {notifications.status === "loading" && <h2>Loading...</h2>}
       {notifications.status === "fulfilled" &&
-        (notifications.data.length ? (
-          notifications.data.map((notification) => (
+        (sortedByTime.length ? (
+          sortedByTime.map((notification) => (
             <NotificationCard
               key={notification._id}
               sourceUser={notification.sourceUser}
