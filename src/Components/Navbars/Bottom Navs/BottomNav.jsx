@@ -1,4 +1,4 @@
-import "./bottomNav.css";
+import styles from "./bottomNav.module.css";
 
 import { House, Search, Bell, Person } from "react-bootstrap-icons";
 import { NavLink } from "react-router-dom";
@@ -7,19 +7,19 @@ import { useSelector } from "react-redux";
 const BottomNav = () => {
   const { loggedInUserData } = useSelector((state) => state.userData);
   return (
-    <div className="bottomNavContainer">
+    <div className={styles.bottomNavContainer}>
       <NavLink to="/home">
-        <House className="bottomNavContainerItems" />
+        <House className={styles.bottomNavContainerItems} />
       </NavLink>
       <NavLink to="/search">
-        <Search className="bottomNavContainerItems" />{" "}
+        <Search className={styles.bottomNavContainerItems} />{" "}
       </NavLink>
       <NavLink to="/notifications">
-        <Bell className="bottomNavContainerItems" />{" "}
+        <Bell className={styles.bottomNavContainerItems} />{" "}
       </NavLink>
 
       <NavLink to={`/profile/${loggedInUserData.username}`}>
-        <Person className="bottomNavContainerItems" />{" "}
+        <Person className={styles.bottomNavContainerItems} />{" "}
       </NavLink>
     </div>
   );

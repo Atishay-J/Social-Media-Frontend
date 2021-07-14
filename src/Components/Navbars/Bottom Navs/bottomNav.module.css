@@ -1,5 +1,6 @@
 .bottomNavContainer {
-  background: rgb(212, 187, 187);
+  /* background: rgb(212, 187, 187); */
+  background: var(--background-black);
   padding: 0.5rem 0.8rem 0.5rem 0.8rem;
   display: flex;
   justify-content: space-around;
@@ -8,7 +9,9 @@
   bottom: 0;
   width: 100%;
   z-index: 5;
+  box-shadow: 2px -8px 35px -13px rgba(0, 0, 0, 0.336);
 }
 .bottomNavContainerItems {
-  font-size: 1.2rem;
+  font-size: 1.25rem;
+  color: var(--font-Color-White);
 }

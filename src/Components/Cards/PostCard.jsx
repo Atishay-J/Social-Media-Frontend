@@ -1,4 +1,3 @@
-import "./postCard.css";
 import { Heart, Chat, ArrowDownUp, HeartFill } from "react-bootstrap-icons";
 import { authAxios } from "../../Utils/authAxios";
 import useTimeAgo from "../../hooks/useTimeAgo";
@@ -7,16 +6,20 @@ import { togglePostLike } from "../../features/post/postSlice";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import styles from "./postCard.module.css";
 
 import { IKImage, IKContext } from "imagekitio-react";
 
 const PostCard = ({
   postUsername,
+  postFirstname,
+  postLastname,
   postAuthorId,
   post,
   postTime,
   postId,
   postLikes,
+  postComments,
   avatar,
   postImg,
 }) => {
@@ -31,6 +34,7 @@ const PostCard = ({
   let userId = loggedInUserData._id;
 
   let numberOfLikes = postLikes.length;
+  let numberOfComments = postComments.length;
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -73,27 +77,34 @@ const PostCard = ({
   }, [post]);
 
   return (
-    <div className="postCardContainer">
-      <div className="postUserInfoContainer">
-        <img src={avatar} alt="User Avatar" className="postUserAvatar" />
-        <div className="postUserInfo">
+    <div className={styles.postCardContainer}>
+      <div className={styles.postUserInfoContainer}>
+        <img src={avatar} alt="User Avatar" className={styles.postUserAvatar} />
+        <div className={styles.postUserInfo}>
           <Link to={`/profile/${postUsername}`}>
-            <h1 className="postUsername">{postUsername}</h1>
+            <h1 className={styles.postFullName}>
+              {postFirstname} {postLastname}
+            </h1>
           </Link>
-          <span className="postTime">{timeAgo} ago</span>
+
+          <div className={styles.postTimeWrapper}>
+            <h2 className={styles.postUsername}>{postUsername}</h2>
+
+            <span className={styles.postTime}>{timeAgo} ago</span>
+          </div>
         </div>
       </div>
-      <div className="postBodyContainer">{parsedPost}</div>
+      <div className={styles.postBodyContainer}>{parsedPost}</div>
       {postImg && (
-        <div className="postImageContainer">
+        <div className={styles.postImageContainer}>
           <IKContext
             publicKey={process.env.REACT_APP_IMAGE_KIT_PUBLIC_KEY}
             urlEndpoint={process.env.REACT_APP_IMAGE_KIT_URL_ENDPOINT}
             transformationPosition="path"
-            authenticationEndpoint="http://localhost:8000/uploadimage"
+            authenticationEndpoint="https://socialmetaphor.herokuapp.com/uploadimage"
           >
             <IKImage
-              className="imageKitImage"
+              className={styles.imageKitImage}
               src={postImg}
               lqip={{ active: true, quality: 20, blur: 10 }}
             />
@@ -101,23 +112,25 @@ const PostCard = ({
         </div>
       )}
 
-      <div className="postInteractionsContainer">
-        <div className="postInteraction" onClick={handleLike}>
+      <div className={styles.postInteractionsContainer}>
+        <div className={styles.postInteraction} onClick={handleLike}>
           {liked ? (
             <>
-              <HeartFill className="postInteractionOption likedButton" />
+              <HeartFill
+                className={`${styles.postInteractionOption} ${styles.likedButton}`}
+              />
             </>
           ) : (
-            <Heart className="postInteractionOption" />
+            <Heart className={styles.postInteractionOption} />
           )}
-          <p className="postInteractionNumbers">{numberOfLikes}</p>
+          <p className={styles.postInteractionNumbers}>{numberOfLikes}</p>
         </div>
         <div
-          className="postInteraction"
+          className={styles.postInteraction}
           onClick={() => navigate(`/posts/${postId}`)}
         >
-          <Chat className="postInteractionOption" />
-          <p className="postInteractionNumbers">23</p>
+          <Chat className={styles.postInteractionOption} />
+          <p className={styles.postInteractionNumbers}>{numberOfComments}</p>
         </div>
       </div>
     </div>

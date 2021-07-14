@@ -22,3 +22,7 @@ input {
 body {
   font-family: var(--font-family-one);
 }
+a {
+  text-decoration: none;
+  color: inherit;
+}

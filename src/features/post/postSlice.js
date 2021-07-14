@@ -2,7 +2,15 @@ import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
 import { authAxios } from "../../Utils/authAxios";
 export const uploadPost = createAsyncThunk(
   "posts/uploadPost",
-  async ({ postContent, userId, username, avatar, postImg }) => {
+  async ({
+    postContent,
+    userId,
+    username,
+    avatar,
+    postImg,
+    firstname,
+    lastname,
+  }) => {
     console.log("Upload Post called", postContent, username, userId);
     try {
       const response = await authAxios.post("/createpost", {
@@ -11,6 +19,8 @@ export const uploadPost = createAsyncThunk(
         userId,
         avatar,
         postImg,
+        firstname,
+        lastname,
       });
       console.log(" New POst Created Data", response);
       return response.data;

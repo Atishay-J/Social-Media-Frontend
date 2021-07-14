@@ -1,10 +1,11 @@
 .postCardContainer {
-  border: 1px solid red;
+  /* border: 1px solid red; */
   width: 80%;
   margin: auto;
   margin-top: 2rem;
   padding: 1rem;
   border-radius: 23px;
+  box-shadow: -1px 1px 45px -21px rgba(32, 32, 32, 0.486);
 }
 .postUserInfoContainer {
   display: flex;
@@ -21,13 +22,27 @@
   /* background: var(--avatar-Backdrop); */
 }
 .postUserInfo {
+  width: 80%;
   margin-left: 0.8rem;
 }
-.postUserName {
+.postFullName {
   font-size: 1.3rem;
+  font-weight: 500;
+}
+.postTimeWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.postUsername {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--font-Gray);
 }
 .postTime {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
+  color: var(--font-Gray);
 }
 .postImageContainer {
   max-width: 100%;
@@ -36,18 +51,19 @@
 .imageKitImage {
   width: 100%;
   height: auto;
-  border-radius: 20px;
+  border-radius: 10px;
 }
 .postBodyContainer {
   margin-top: 1rem;
 }
 .postInteractionsContainer {
-  width: 60%;
+  width: 40%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-top: 1rem;
   /* background: purple; */
+  color: var(--font-Color);
 }
 .postInteraction {
   display: flex;
@@ -56,12 +72,12 @@
   cursor: pointer;
 }
 .postInteractionOption {
-  font-size: 1rem;
+  font-size: 1.2rem;
 }
 .postInteractionNumbers {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   margin-left: 0.5rem;
 }
 .likedButton {
-  color: rgb(218, 9, 26);
+  color: var(--primary-Col);
 }

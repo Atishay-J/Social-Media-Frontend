@@ -29,6 +29,8 @@ const CreatePost = () => {
     let postContent = editorState.getCurrentContent().getPlainText();
 
     let username = loggedInUserData.username;
+    let firstname = loggedInUserData.firstname;
+    let lastname = loggedInUserData.lastname;
     let avatar = loggedInUserData.avatar;
     let userId = loggedInUserData._id;
 
@@ -39,6 +41,8 @@ const CreatePost = () => {
         uploadPost({
           postContent,
           username,
+          firstname,
+          lastname,
           userId,
           avatar,
           postImg: imageUploadUrl,
@@ -80,39 +84,41 @@ const CreatePost = () => {
           src={loggedInUserData.avatar}
           alt="User Avatar"
         />
-        <PostEditor editorState={editorState} setEditorState={setEditorState} />
       </div>
 
-      <IKContext
-        publicKey={process.env.REACT_APP_IMAGE_KIT_PUBLIC_KEY}
-        urlEndpoint={process.env.REACT_APP_IMAGE_KIT_URL_ENDPOINT}
-        transformationPosition="path"
-        authenticationEndpoint="http://localhost:8000/uploadimage"
-      >
-        <div className={styles.buttonsWrapper}>
-          {showUploadBtn ? (
-            <IKUpload
-              className={styles.imageKitUpload}
-              onError={onError}
-              onSuccess={onSuccess}
-              useUniqueFileName={true}
-              folder={"/socialMedia"}
-            />
-          ) : (
-            <Upload
-              className={styles.uploadBtnIcon}
-              onClick={() => setShowUploadBtn(true)}
-            />
-          )}
+      <div className={styles.postEditorWrapper}>
+        <PostEditor editorState={editorState} setEditorState={setEditorState} />
+        <IKContext
+          publicKey={process.env.REACT_APP_IMAGE_KIT_PUBLIC_KEY}
+          urlEndpoint={process.env.REACT_APP_IMAGE_KIT_URL_ENDPOINT}
+          transformationPosition="path"
+          authenticationEndpoint="https://socialmetaphor.herokuapp.com/uploadimage"
+        >
+          <div className={styles.buttonsWrapper}>
+            {showUploadBtn ? (
+              <IKUpload
+                className={styles.imageKitUpload}
+                onError={onError}
+                onSuccess={onSuccess}
+                useUniqueFileName={true}
+                folder={"/socialMedia"}
+              />
+            ) : (
+              <Upload
+                className={styles.uploadBtnIcon}
+                onClick={() => setShowUploadBtn(true)}
+              />
+            )}
 
-          <button className={styles.postButton} onClick={createPost}>
-            Post
-          </button>
-        </div>
-        {imageUploadUrl && (
-          <IKImage className={styles.uploadedImage} src={imageUploadUrl} />
-        )}
-      </IKContext>
+            <button className={styles.postButton} onClick={createPost}>
+              Post
+            </button>
+          </div>
+          {imageUploadUrl && (
+            <IKImage className={styles.uploadedImage} src={imageUploadUrl} />
+          )}
+        </IKContext>
+      </div>
     </div>
   );
 };

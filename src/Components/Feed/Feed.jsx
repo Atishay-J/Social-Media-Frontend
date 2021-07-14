@@ -25,21 +25,25 @@ const Feed = () => {
   }, []);
 
   return (
-    <div className="postsContainer">
+    <div className="postsContainer" style={{ paddingBottom: "5rem" }}>
       {postStatus === "loading" && <h1>Loading...</h1>}
       {uploadStatus === "loading" && <h1>Uploading...</h1>}
       {postStatus === "fulfilled" && (
         <>
           {sortedFeed?.map((postData) => (
             <PostCard
-              key={`${postData._id}post`}
+              // key={`${postData._id}post`}
+              key={postData._id}
               postUsername={postData.username}
+              postFirstname={postData.firstname}
+              postLastname={postData.lastname}
               postAuthorId={postData.userId}
               avatar={postData.avatar}
               post={postData.postContent}
               postTime={postData.createdAt}
               postId={postData._id}
               postLikes={postData.likes}
+              postComments={postData.comments}
               postImg={postData.postImg}
             />
           ))}

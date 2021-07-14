@@ -1,35 +1,41 @@
 .createPostContainer {
   width: 80%;
-  border: 1px solid gray;
   border-radius: 20px;
   margin: auto;
   margin-top: 1.5rem;
-  padding: 1rem 0rem 1rem 0rem;
+  padding: 1rem 0.5rem 1rem 0.5rem;
   display: flex;
-  flex-direction: column;
+  box-shadow: -1px 1px 45px -21px rgba(32, 32, 32, 0.486);
 }
-.createPostWrapper {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
+
+.postEditorWrapper {
+  /* background: green; */
+  width: 100%;
+  padding-left: 1rem;
 }
+
 .userAvatar {
   width: 2.5rem;
   height: 2.5rem;
   align-self: flex-start;
+  border: 1px solid rgb(252, 82, 175);
+  border-radius: 50px;
+  background: var(--avatar-Backdrop);
 }
 .buttonsWrapper {
   display: flex;
-  margin-top: 0.6rem;
+  margin-top: 1.3rem;
   justify-content: space-between;
   align-items: center;
+  /* background: red; */
 }
 .postButton {
   border: none;
   width: 4rem;
   height: 1.8rem;
   border-radius: 20px;
-  background: rgb(4, 100, 226);
+  /* background: rgb(4, 100, 226); */
+  background: var(--primary-Col);
   color: rgb(247, 245, 241);
   cursor: pointer;
   align-self: flex-end;
@@ -47,4 +53,9 @@
   margin-left: 1rem;
   font-size: 1.1rem;
   cursor: pointer;
+}
+.imageKitUpload {
+  width: 5rem;
+  border: none;
+  font-size: 0.8rem;
 }
