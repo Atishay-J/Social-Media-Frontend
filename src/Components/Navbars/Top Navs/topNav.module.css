@@ -1,0 +1,58 @@
+.topNavContainer {
+  background: var(--background-black);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+}
+.topNavMenuBtn {
+  font-size: 1.4rem;
+}
+
+.logo {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--font-Color-White);
+}
+.logoBackdrop {
+  background: var(--primary-Col);
+  padding: 0.3rem;
+  border-radius: 81% 19% 28% 72% / 56% 40% 60% 44%;
+}
+.userProfile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+}
+.avatar {
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50px;
+  border: 1px solid rgb(8, 15, 122);
+  background: var(--avatar-Backdrop);
+}
+.logoutWrapper {
+  height: 2.5rem;
+  width: 8rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 5rem;
+  margin-right: 1rem;
+  position: absolute;
+  top: 2.8rem;
+  border-radius: 15px;
+  cursor: pointer;
+  background: var(--background-white);
+  box-shadow: 2px 0px 27px -10px rgba(206, 20, 106, 0.925);
+  z-index: 2;
+  color: var(--font-Black);
+  /* left: 0; */
+}
+.logoutText {
+  font-size: 0.8rem;
+  font-weight: 500;
+}

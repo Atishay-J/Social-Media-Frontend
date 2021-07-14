@@ -14,6 +14,7 @@
   --background-white: #fcfcfc;
   --primary-Col: rgb(180, 26, 26);
   --font-Gray: #868686;
+  --font-Black: #222222;
 }
 input {
   outline: none;
