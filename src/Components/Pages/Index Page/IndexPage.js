@@ -1,15 +1,12 @@
 import styles from "./indexPage.module.css";
 import { useNavigate } from "react-router-dom";
+import PageNavbar from "../Page Navbar/PageNavbar";
 
 const IndexPage = () => {
   const navigate = useNavigate();
   return (
     <div className={styles.pageContainer}>
-      <div className={styles.navbar}>
-        <h2 className={styles.logo}>
-          Social Meta<span className={styles.logoBackdrop}>phor</span>
-        </h2>
-      </div>
+      <PageNavbar />
       <div className={styles.hero}>
         <div className={styles.heroText}>
           <h1>Welcome to the Social Metaphor</h1>

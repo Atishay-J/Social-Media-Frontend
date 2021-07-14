@@ -10,7 +10,10 @@
   color: var(--font-Color-White);
   display: flex;
   align-items: center;
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
 }
+
 .logo {
   font-size: 1.3rem;
   font-weight: 500;
@@ -19,8 +22,6 @@
 .logoBackdrop {
   /* background: rgb(223, 147, 33); */
   background: var(--primary-Col);
-  box-shadow: 2px 2px 20px -2px rgb(63, 0, 9);
-  border: 1px solid rgba(21, 1, 26, 0.705);
   padding: 0.3rem;
   /* border-radius: 30px 0px 30px 0px; */
   border-radius: 81% 19% 28% 72% / 56% 40% 60% 44%;
@@ -65,12 +66,13 @@
   width: 6.5rem;
   height: 1.8rem;
   margin-top: 2rem;
-  background: rgb(180, 26, 26);
+  background: var(--primary-Col);
   border: none;
   border-radius: 20px;
   color: var(--font-Color-White);
   cursor: pointer;
   font-weight: 700;
+  outline: none;
 }
 @keyframes swing {
   0%,

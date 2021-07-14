@@ -15,7 +15,7 @@ import { Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchLoggedInUserData } from "./features/User/userDataSlice";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 
 function App() {
   const { loggedInUserStatus } = useSelector((state) => state.userData);
@@ -38,7 +38,7 @@ function App() {
 
   return (
     <div className="App">
-      <ToastContainer />
+      {/* <ToastContainer /> */}
       <Routes>
         <Route path="/" element={<IndexPage />} />
         <Route path="/signin" element={<SignIn />} />

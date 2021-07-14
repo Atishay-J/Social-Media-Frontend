@@ -1,18 +1,25 @@
 .container {
   /* background: red; */
-  min-height: 100vh;
+  max-width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  /* align-items: center; */
+  background: var(--background-white);
+}
+.formWrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: var(--background-white);
+  height: 100%;
 }
 .form {
   /* background: purple; */
   display: flex;
   flex-direction: column;
   width: 80%;
-  margin: auto;
   padding: 1.5rem;
   border-radius: 20px;
   box-shadow: 2px 1px 19px -2px rgba(0, 0, 0, 0.096);
@@ -25,10 +32,11 @@
 .inputWrapper {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  margin-top: 0.6rem;
 }
 .inputs {
   height: 1.8rem;
-  margin-top: 0.6rem;
   padding: 0.2rem 0.5rem 0.2rem 0.5rem;
   border: none;
   background: var(--background-white);
@@ -41,8 +49,23 @@
   border: 1px solid rgba(177, 176, 176, 0.096);
   margin-top: 0.4rem;
 } */
+.passwordWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.passwordBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.passwordIcon {
+  font-size: 1rem;
+  color: var(--font-Gray);
+}
 .submitBtn {
-  /* background: red; */
   border: none;
   height: 2rem;
   width: 7.5rem;
@@ -55,4 +78,14 @@
 }
 .submitBtn:hover {
   box-shadow: 0px 3px 20px 0px rgba(173, 9, 9, 0.301);
+}
+.signOption {
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--font-Gray);
+  margin-top: 1.3rem;
+}
+.signOptionLink {
+  color: var(--primary-Col);
+  cursor: pointer;
 }
