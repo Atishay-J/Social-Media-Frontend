@@ -11,5 +11,13 @@
   --font-family-one: "Poppins", sans-serif;
   --avatar-Backdrop: rgb(216, 151, 11);
   --background-black: rgb(13, 1, 14);
+  --background-white: #fcfcfc;
   --primary-Col: rgb(180, 26, 26);
+  --font-Gray: #868686;
+}
+input {
+  outline: none;
+}
+body {
+  font-family: var(--font-family-one);
 }
