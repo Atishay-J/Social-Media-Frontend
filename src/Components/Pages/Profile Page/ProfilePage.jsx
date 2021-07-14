@@ -1,21 +1,21 @@
 import { useSelector, useDispatch } from "react-redux";
-import BottomNav from "../Navbars/Bottom Navs/BottomNav";
-import TopNav from "../Navbars/Top Navs/TopNav";
+import BottomNav from "../../Navbars/Bottom Navs/BottomNav";
+import TopNav from "../../Navbars/Top Navs/TopNav";
 // import styles from "./profilePage.module.css";
-import useSortByTime from "../../hooks/useSortByTime";
-import PostCard from "../Cards/PostCard";
-import ProfileCard from "../Cards/ProfileCard";
-import UpdateProfileCard from "../Cards/UpdateProfileCard";
+import useSortByTime from "../../../hooks/useSortByTime";
+import PostCard from "../../Cards/PostCard";
+import ProfileCard from "../../Cards/ProfileCard";
+import UpdateProfileCard from "../../Cards/UpdateProfileCard";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { authAxios } from "../../Utils/authAxios";
+import { authAxios } from "../../../Utils/authAxios";
 import { ToastContainer, toast } from "react-toastify";
-import { fetchAllPosts } from "../../features/post/postSlice";
+import { fetchAllPosts } from "../../../features/post/postSlice";
 import {
   toggleFollow,
   fetchUserData,
   resetUserData,
-} from "../../features/User/userDataSlice";
+} from "../../../features/User/userDataSlice";
 import styles from "./profilePage.module.css";
 
 const ProfilePage = () => {
