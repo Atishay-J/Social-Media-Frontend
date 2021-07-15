@@ -2,15 +2,18 @@ import styles from "./indexPage.module.css";
 import { useNavigate } from "react-router-dom";
 import PageNavbar from "../Page Navbar/PageNavbar";
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 const IndexPage = () => {
   const { isUserLoggedIn } = useSelector((state) => state.auth);
 
   const navigate = useNavigate();
 
-  if (isUserLoggedIn) {
-    navigate("/home");
-  }
+  useEffect(() => {
+    if (isUserLoggedIn) {
+      navigate("/home");
+    }
+  }, [isUserLoggedIn, navigate]);
 
   return (
     <div className={styles.pageContainer}>

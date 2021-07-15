@@ -11,7 +11,9 @@ const NotificationCard = ({ sourceUser, createdAt, notificationType }) => {
       </div>
       <div className={styles.userInfo}>
         <div>
-          <h4 className={styles.firstname}>{sourceUser.firstname}</h4>
+          <h4 className={styles.firstname}>
+            {sourceUser.firstname} {sourceUser.lastname}
+          </h4>
           <h5 className={styles.username}>{sourceUser.username}</h5>
         </div>
         <div className={styles.notificationType}>

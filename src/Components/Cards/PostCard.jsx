@@ -41,7 +41,6 @@ const PostCard = ({
 
   const handleLike = async () => {
     dispatch(togglePostLike({ postId, postAuthorId, username, userId }));
-
     await authAxios
       .post(`/post/togglelike`, {
         username: loggedInUserData.username,
