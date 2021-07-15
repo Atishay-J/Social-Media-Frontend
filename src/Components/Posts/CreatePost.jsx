@@ -23,7 +23,6 @@ const CreatePost = () => {
 
   const createPost = () => {
     let postContent = editorState.getCurrentContent().getPlainText();
-
     let username = loggedInUserData.username;
     let firstname = loggedInUserData.firstname;
     let lastname = loggedInUserData.lastname;

@@ -1,11 +1,11 @@
 import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
-import axios from "axios";
 import { authAxios } from "../../Utils/authAxios";
 
 export const fetchLoggedInUserData = createAsyncThunk(
   "user/loggedInUserData",
 
   async (userData, { rejectWithValue }) => {
+    console.log("FEtching dataaa");
     try {
       authAxios.defaults.headers.common["Authorization"] =
         localStorage.getItem("token");
@@ -68,9 +68,12 @@ export const userDataSlice = createSlice({
       }
     },
     resetUserData: (state, action) => {
-      console.log("Resetting UserData");
       state.userDataStatus = "idle";
       state.userData = {};
+    },
+    resetLoggedInUserData: (state, acions) => {
+      state.loggedInUserStatus = "idle";
+      state.loggedInUserData = {};
     },
   },
   extraReducers: {
@@ -100,5 +103,6 @@ export const userDataSlice = createSlice({
     },
   },
 });
-export const { toggleFollow, resetUserData } = userDataSlice.actions;
+export const { toggleFollow, resetUserData, resetLoggedInUserData } =
+  userDataSlice.actions;
 export default userDataSlice.reducer;

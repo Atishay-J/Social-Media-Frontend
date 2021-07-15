@@ -26,7 +26,7 @@ function App() {
         dispatch(fetchLoggedInUserData());
       }
     }
-  }, [isUserLoggedIn, loggedInUserStatus]);
+  }, [dispatch, isUserLoggedIn, loggedInUserStatus]);
 
   return (
     <div className="App">

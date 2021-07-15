@@ -3,6 +3,7 @@ import styles from "./topNav.module.css";
 import { BoxArrowRight } from "react-bootstrap-icons";
 import { useSelector } from "react-redux";
 import { signOut } from "../../../features/auth/authSlice";
+import { resetLoggedInUserData } from "../../../features/User/userDataSlice";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 
@@ -14,6 +15,7 @@ const TopNav = () => {
 
   const logout = () => {
     dispatch(signOut());
+    dispatch(resetLoggedInUserData());
   };
 
   return (
