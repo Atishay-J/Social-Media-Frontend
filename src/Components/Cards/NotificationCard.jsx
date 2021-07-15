@@ -1,11 +1,16 @@
 import useTimeAgo from "../../hooks/useTimeAgo";
 import styles from "./notificationCard.module.css";
+import { useNavigate } from "react-router-dom";
 
 const NotificationCard = ({ sourceUser, createdAt, notificationType }) => {
   const timeAgo = useTimeAgo(createdAt);
+  const navigate = useNavigate();
 
   return (
-    <div className={styles.cardContainer}>
+    <div
+      className={styles.cardContainer}
+      onClick={() => navigate(`/profile/${sourceUser.username}`)}
+    >
       <div className={styles.avatarWrapper}>
         <img className={styles.avatar} src={sourceUser.avatar} alt="Avatar" />
       </div>
