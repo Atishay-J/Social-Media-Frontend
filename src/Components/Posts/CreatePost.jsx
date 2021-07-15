@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { EditorState, ContentState } from "draft-js";
 import PostEditor from "./Post Editor/PostEditor";
 
@@ -17,13 +17,9 @@ const CreatePost = () => {
   const [imageUploadUrl, setImageUploadUrl] = useState("");
   const [showUploadBtn, setShowUploadBtn] = useState(false);
 
-  const state = useSelector((state) => state.posts);
-
   const { loggedInUserData } = useSelector((state) => state.userData);
 
   const dispatch = useDispatch();
-
-  console.log("LOGGEDD IINN User Dataa", loggedInUserData);
 
   const createPost = () => {
     let postContent = editorState.getCurrentContent().getPlainText();
@@ -33,8 +29,6 @@ const CreatePost = () => {
     let lastname = loggedInUserData.lastname;
     let avatar = loggedInUserData.avatar;
     let userId = loggedInUserData._id;
-
-    console.log("loggedInUserData on Create POst ", userId);
 
     if (postContent || imageUploadUrl) {
       dispatch(
@@ -61,18 +55,12 @@ const CreatePost = () => {
     }
   };
 
-  useEffect(() => {
-    console.log("State ", state);
-  }, [state]);
-
   const onError = (err) => {
     console.log("IMAGE UPLOAD Error");
     console.log(err);
   };
 
   const onSuccess = (res) => {
-    console.log("IMAGE UPLOAD Success");
-    console.log(res);
     setImageUploadUrl(res.url);
   };
 

@@ -1,6 +1,6 @@
 import styles from "./profileCard.module.css";
 import { authAxios } from "../../Utils/authAxios";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { toggleFollow } from "../../features/User/userDataSlice";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
@@ -17,13 +17,6 @@ const ProfileCard = ({
   const dispatch = useDispatch();
 
   const updateFollowOnServer = () => {
-    console.log(
-      "Follow On Server chjjeck \n",
-      loggedInUserData,
-      "\n userDATA \n",
-      userProfileData
-    );
-
     authAxios
       .post("/togglefollow", {
         username: loggedInUserData.username,
@@ -31,9 +24,9 @@ const ProfileCard = ({
         followingTo: userProfileData.username,
         followingToId: userProfileData._id,
       })
-      .then((response) => console.log("REESSS FOOOLLOOW ", response))
+      .then((response) => console.log("Success "))
       .catch((err) => {
-        console.log("RRREES ERRR FOLLOW ", err);
+        console.log("Error on Follow ", err);
         dispatch(toggleFollow(userProfileData.username));
         toggleUserProfileFollower();
         toast("Some Error Occured, Refresh the page");
@@ -70,10 +63,6 @@ const ProfileCard = ({
     toggleUserProfileFollower();
     updateFollowOnServer();
   };
-
-  useEffect(() => {
-    console.log("Uesr profgile data chnanged", userProfileData);
-  }, [userProfileData]);
 
   return (
     <div className={styles.profileContainer}>

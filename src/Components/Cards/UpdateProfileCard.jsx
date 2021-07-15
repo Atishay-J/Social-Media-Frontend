@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { authAxios } from "../../Utils/authAxios";
-import { ToastContainer, toast } from "react-toastify";
 import styles from "./profileCard.module.css";
 import { XCircleFill } from "react-bootstrap-icons";
 import { toastDark, toastSuccess } from "../../Utils/toastMessage";
@@ -22,12 +21,6 @@ const UpdateProfileCard = ({ setShowUpdateProfile, setUserProfileData }) => {
   };
 
   const updateProfile = async () => {
-    console.log(
-      "UUPPPAADD ",
-      { firstname, lastname, bio, location },
-      firstname !== "" && lastname !== "" && bio !== "" && location !== ""
-    );
-
     if (firstname !== "" && lastname !== "" && bio !== "" && location !== "") {
       await authAxios
         .post("/updateprofile", {
@@ -37,7 +30,6 @@ const UpdateProfileCard = ({ setShowUpdateProfile, setUserProfileData }) => {
           location,
         })
         .then((res) => {
-          console.log("Response Update profile", res);
           toastSuccess("Profile Updated");
         })
         .catch((err) => {

@@ -71,7 +71,9 @@ const PostPage = () => {
   return (
     <>
       <TopNav />
-      {postData.status === "loading" && <h1>Loading...</h1>}
+      {postData.status === "loading" && (
+        <h1 className="loadingStatus">Loading...</h1>
+      )}
       {postData.status === "fulfilled" && (
         <div className={styles.container}>
           <PostCard
@@ -102,7 +104,9 @@ const PostPage = () => {
 
           <div className={styles.allComments}>
             <h3 className={styles.commentsHeading}>Comments</h3>
-            {uploadComment.status === "loading" && <h4>Uploading...</h4>}
+            {uploadComment.status === "loading" && (
+              <h4 className="loadingStatus">Uploading...</h4>
+            )}
             {postData.data.comments.length ? (
               postData.data.comments.map((comment) => (
                 <CommentCard

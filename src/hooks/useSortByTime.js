@@ -1,6 +1,4 @@
 const useSortByTime = (data) => {
-  console.log("Data in Sort By Time ", data);
-
   let sortedData = [];
 
   if (data) {

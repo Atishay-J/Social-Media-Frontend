@@ -1,4 +1,4 @@
-import { Heart, Chat, ArrowDownUp, HeartFill } from "react-bootstrap-icons";
+import { Heart, Chat, HeartFill } from "react-bootstrap-icons";
 import { authAxios } from "../../Utils/authAxios";
 import useTimeAgo from "../../hooks/useTimeAgo";
 import { useDispatch } from "react-redux";
@@ -69,9 +69,13 @@ const PostCard = ({
   const checkHashtags = () => {
     const rule = /([#|＃][^\s]+)/g;
 
-    let parsedPost = post?.split(rule).map((e) => {
+    let parsedPost = post?.split(rule).map((e, index) => {
       if (e.match(rule)) {
-        return <span style={{ color: "blue" }}>{e}</span>;
+        return (
+          <span key={index} style={{ color: "blue" }}>
+            {e}
+          </span>
+        );
       }
       return e;
     });

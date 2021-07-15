@@ -11,14 +11,9 @@ const Feed = () => {
 
   const dispatch = useDispatch();
 
-  console.log("Feed data from feed", posts);
-
   const sortedFeed = useSortByTime(posts);
 
-  console.log("Sorted Feed ", sortedFeed);
-
   useEffect(() => {
-    console.log("FEEEDD KKAAA STATUSSS ", postStatus);
     if (postStatus === "idle") {
       dispatch(fetchAllPosts());
     }
@@ -26,8 +21,12 @@ const Feed = () => {
 
   return (
     <div className="postsContainer" style={{ paddingBottom: "5rem" }}>
-      {postStatus === "loading" && <h1>Loading...</h1>}
-      {uploadStatus === "loading" && <h1>Uploading...</h1>}
+      {postStatus === "loading" && (
+        <h1 className="loadingStatus">Loading...</h1>
+      )}
+      {uploadStatus === "loading" && (
+        <h1 className="loadingStatus">Uploading...</h1>
+      )}
       {postStatus === "fulfilled" && (
         <>
           {sortedFeed?.map((postData) => (

@@ -15,27 +15,18 @@ import { Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchLoggedInUserData } from "./features/User/userDataSlice";
-import { ToastContainer, toast } from "react-toastify";
-import TopNav from "./Components/Navbars/Top Navs/TopNav";
-import BottomNav from "./Components/Navbars/Bottom Navs/BottomNav";
 function App() {
   const { loggedInUserStatus } = useSelector((state) => state.userData);
   const { isUserLoggedIn } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("UserSTatetete", localStorage.getItem("token"));
     if (localStorage.getItem("token")) {
       if (loggedInUserStatus === "idle") {
-        console.log("FEtched LOGGEDDD IN USER DATA IN THER APPPP");
         dispatch(fetchLoggedInUserData());
       }
     }
   }, [isUserLoggedIn, loggedInUserStatus]);
-
-  // useEffect(() => {
-  //   console.log("Tracking Stattusss", status);
-  // }, [status]);
 
   return (
     <div className="App">

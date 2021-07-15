@@ -11,7 +11,6 @@ export const uploadPost = createAsyncThunk(
     firstname,
     lastname,
   }) => {
-    console.log("Upload Post called", postContent, username, userId);
     try {
       const response = await authAxios.post("/createpost", {
         postContent,
@@ -22,10 +21,10 @@ export const uploadPost = createAsyncThunk(
         firstname,
         lastname,
       });
-      console.log(" New POst Created Data", response);
+
       return response.data;
     } catch (err) {
-      console.log("Errorr aa gya bhaagooo ", err);
+      console.log("Some error occured while creating post ", err);
       return err;
     }
   }
@@ -34,13 +33,12 @@ export const uploadPost = createAsyncThunk(
 export const fetchAllPosts = createAsyncThunk(
   "posts/fetchAllPosts",
   async () => {
-    console.log("Fetching Alll Posts");
     try {
       const response = await authAxios.post("/allposts");
-      console.log("Fetch Post Response ", response);
+
       return response.data;
     } catch (err) {
-      console.log("Fetch krne pr error aaya", err);
+      console.log("some Error while fetching posts", err);
       return err;
     }
   }
