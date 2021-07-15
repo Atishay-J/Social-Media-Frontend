@@ -100,6 +100,8 @@ const ProfilePage = () => {
                       <PostCard
                         key={`${postData._id}profile`}
                         postUsername={postData.username}
+                        postFirstname={postData.firstname}
+                        postLastname={postData.lastname}
                         avatar={postData.avatar}
                         post={postData.postContent}
                         postImg={postData.postImg}

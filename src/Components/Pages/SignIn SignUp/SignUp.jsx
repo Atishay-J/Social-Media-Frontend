@@ -19,11 +19,13 @@ const SignUp = () => {
     });
 
   const [showPassword, setShowPassword] = useState(false);
+  const [showLoader, setShowLoader] = useState(false);
 
   const navigate = useNavigate();
 
   const signUp = async (e) => {
     e.preventDefault();
+    setShowLoader(true);
 
     if (
       (firstname !== "") &
@@ -41,12 +43,12 @@ const SignUp = () => {
           password,
         })
         .then((res) => {
-          console.log("Response from sever ", res);
+          setShowLoader(false);
           toastSuccess("Account Created");
           navigate("/signin");
         })
         .catch((err) => {
-          console.log("Error from server ", err.response);
+          setShowLoader(false);
           toastDark(err.response.data);
         });
     }
@@ -56,7 +58,9 @@ const SignUp = () => {
   return (
     <div className={styles.container}>
       <PageNavbar />
+
       <div className={styles.formWrapper}>
+        {showLoader && <h3 className={styles.signInMsg}>signing you up...</h3>}
         <form className={styles.form} onSubmit={(e) => signUp(e)}>
           <h1 className={styles.formHeading}>Sign Up</h1>
           <div className={styles.inputWrapper}>

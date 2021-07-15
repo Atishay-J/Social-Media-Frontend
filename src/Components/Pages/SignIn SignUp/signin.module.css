@@ -8,6 +8,11 @@
   /* align-items: center; */
   background: var(--background-white);
 }
+.signInMsg {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--font-Gray);
+}
 .formWrapper {
   display: flex;
   flex-direction: column;
@@ -88,4 +93,11 @@
 .signOptionLink {
   color: var(--primary-Col);
   cursor: pointer;
+}
+
+@media only screen and (min-width: 620px) {
+  .formWrapper {
+    width: 50%;
+    margin: auto;
+  }
 }
