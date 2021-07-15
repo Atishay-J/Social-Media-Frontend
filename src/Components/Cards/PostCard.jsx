@@ -42,13 +42,6 @@ const PostCard = ({
   const handleLike = async () => {
     dispatch(togglePostLike({ postId, postAuthorId, username, userId }));
 
-    console.log("Data sending to like on server ", {
-      postId,
-      postAuthorId,
-      username,
-      userId,
-    });
-
     await authAxios
       .post(`/post/togglelike`, {
         username: loggedInUserData.username,
@@ -56,7 +49,7 @@ const PostCard = ({
         userId,
         postAuthorId,
       })
-      .then((res) => console.log("Handle Axios Like ", res))
+      .then((res) => console.log("Handle Axios Like "))
       .catch((err) => console.log("Handle axios like error", err));
   };
 

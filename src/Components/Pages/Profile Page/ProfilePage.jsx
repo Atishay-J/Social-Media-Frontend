@@ -8,7 +8,6 @@ import ProfileCard from "../../Cards/ProfileCard";
 import UpdateProfileCard from "../../Cards/UpdateProfileCard";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { authAxios } from "../../../Utils/authAxios";
 import { ToastContainer, toast } from "react-toastify";
 import { fetchAllPosts } from "../../../features/post/postSlice";
 import {
@@ -36,8 +35,6 @@ const ProfilePage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("I am called Usereffect");
-
     if (username === loggedInUserData.username) {
       setUserProfileData(loggedInUserData);
       setShowFollowBtn(false);
@@ -45,9 +42,8 @@ const ProfilePage = () => {
 
     if (username !== loggedInUserData.username) {
       setShowFollowBtn(true);
-      console.log("Caaleedd MEEEEEE OUUUTTT");
+
       if (userDataStatus === "idle") {
-        console.log("Caaleedd MEEEEEE");
         dispatch(fetchUserData(username));
       }
       setUserProfileData(userData);
@@ -63,10 +59,6 @@ const ProfilePage = () => {
   useEffect(() => {
     dispatch(resetUserData());
   }, [dispatch, username]);
-
-  useEffect(() => {
-    console.log("I am changed profile page", userProfileData);
-  }, [userProfileData]);
 
   const filterUserPosts = posts.filter((post) => post.username === username);
   const sortedFeed = useSortByTime(filterUserPosts);

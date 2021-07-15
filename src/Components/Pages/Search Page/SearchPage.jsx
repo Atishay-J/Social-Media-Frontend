@@ -18,7 +18,6 @@ const SearchPage = () => {
     await authAxios
       .post("/search", { username: userInput })
       .then((res) => {
-        console.log("Search Response ===> ", res);
         setSearchResults({ data: res.data, status: "fulfilled" });
       })
       .catch((err) => {

@@ -22,18 +22,14 @@ const PostPage = () => {
 
   const sortedByTime = useSortByTime();
 
-  console.log("USErdata ", loggedInUserData);
-
   const fetchPost = async () => {
     setPostData({ status: "loading", data: "" });
     await authAxios
       .post(`/findpost/${postId}`)
       .then((res) => {
-        console.log("response value =====>>>>>", res);
         setPostData({ status: "fulfilled", data: res.data });
       })
       .catch((err) => {
-        console.log("error while fetching post", err);
         setPostData({ status: "error", data: "" });
       });
   };
@@ -52,12 +48,10 @@ const PostPage = () => {
         comment: commentInput,
       })
       .then((res) => {
-        console.log("Response ", res);
         setUploadComment({ status: "fulfilled", data: res.data });
         fetchPost();
       })
       .catch((err) => {
-        console.log("error ", err);
         setUploadComment({ status: "error" });
       });
   };
@@ -108,8 +102,9 @@ const PostPage = () => {
               <h4 className="loadingStatus">Uploading...</h4>
             )}
             {postData.data.comments.length ? (
-              postData.data.comments.map((comment) => (
+              postData.data.comments.map((comment, index) => (
                 <CommentCard
+                  key={index}
                   avatar={comment.avatar}
                   firstname={comment.firstname}
                   lastname={comment.lastname}

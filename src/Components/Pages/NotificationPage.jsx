@@ -19,16 +19,7 @@ const NotificationPage = () => {
 
   const sortedByTime = useSortByTime(notifications.data);
 
-  console.log("Runned againn ", sortedByTime);
-
   const fetchNotifications = async () => {
-    console.log(
-      "Usererrr IDDDDD",
-      loggedInUserData,
-      "Status ",
-      loggedInUserStatus
-    );
-
     setNotifications({
       status: "loading",
       data: "",
@@ -37,14 +28,12 @@ const NotificationPage = () => {
     await authAxios
       .post("/notifications", { userId: loggedInUserData._id })
       .then((res) => {
-        console.log("\n\n Notificattionsg \n", res);
-
         setNotifications({
           status: "fulfilled",
           data: res.data,
         });
       })
-      .catch((err) => console.log("\n\n Notificattionsg Errorrr \n", err));
+      .catch((err) => console.log("Error while fetching notifications", err));
   };
 
   useEffect(() => {

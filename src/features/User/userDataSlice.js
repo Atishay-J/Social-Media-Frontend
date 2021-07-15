@@ -5,7 +5,6 @@ export const fetchLoggedInUserData = createAsyncThunk(
   "user/loggedInUserData",
 
   async (userData, { rejectWithValue }) => {
-    console.log("FEtching dataaa");
     try {
       authAxios.defaults.headers.common["Authorization"] =
         localStorage.getItem("token");
