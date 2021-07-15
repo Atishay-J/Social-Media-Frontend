@@ -6,12 +6,14 @@ import { signOut } from "../../../features/auth/authSlice";
 import { resetLoggedInUserData } from "../../../features/User/userDataSlice";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const TopNav = () => {
   const { loggedInUserData } = useSelector((state) => state.userData);
   const [showLogoutBtn, setShowLogoutBtn] = useState(false);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const logout = () => {
     dispatch(signOut());
@@ -20,7 +22,7 @@ const TopNav = () => {
 
   return (
     <div className={styles.topNavContainer}>
-      <h2 className={styles.logo}>
+      <h2 className={styles.logo} onClick={() => navigate("/home")}>
         Social Meta<span className={styles.logoBackdrop}>phor</span>
       </h2>
       <div
