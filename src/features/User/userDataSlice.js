@@ -66,11 +66,18 @@ export const userDataSlice = createSlice({
         fetchLoggedInUserData();
       }
     },
+    // updateWallColor: (state, action) => {
+    //   console.log("New wall color ", action.payload);
+    //   state.loggedInUserData = {
+    //     ...state.loggedInUserData,
+    //     wallColor: action.payload.wallColor,
+    //   };
+    // },
     resetUserData: (state, action) => {
       state.userDataStatus = "idle";
       state.userData = {};
     },
-    resetLoggedInUserData: (state, acions) => {
+    resetLoggedInUserData: (state, acion) => {
       state.loggedInUserStatus = "idle";
       state.loggedInUserData = {};
     },
@@ -102,6 +109,10 @@ export const userDataSlice = createSlice({
     },
   },
 });
-export const { toggleFollow, resetUserData, resetLoggedInUserData } =
-  userDataSlice.actions;
+export const {
+  toggleFollow,
+  resetUserData,
+  resetLoggedInUserData,
+  // updateWallColor,
+} = userDataSlice.actions;
 export default userDataSlice.reducer;

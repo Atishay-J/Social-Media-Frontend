@@ -5,7 +5,8 @@ import TopNav from "../../Navbars/Top Navs/TopNav";
 import useSortByTime from "../../../hooks/useSortByTime";
 import PostCard from "../../Cards/PostCard";
 import ProfileCard from "../../Cards/ProfileCard";
-import UpdateProfileCard from "../../Cards/UpdateProfileCard";
+// import UpdateProfileCard from "../../Cards/UpdateProfileCard";
+import UpdateProfileOptions from "./UpdateProfileOptions";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
@@ -30,6 +31,9 @@ const ProfilePage = () => {
     error,
   } = useSelector((state) => state.userData);
   const { posts, postStatus } = useSelector((state) => state.posts);
+
+  console.log("logged in User data", loggedInUserData);
+  console.log("USER DATAT", userData);
 
   const { username } = useParams();
   const dispatch = useDispatch();
@@ -67,7 +71,8 @@ const ProfilePage = () => {
     <div>
       <ToastContainer />
       {showUpdateProfile ? (
-        <UpdateProfileCard
+        <UpdateProfileOptions
+          userProfileData={userProfileData}
           setShowUpdateProfile={setShowUpdateProfile}
           setUserProfileData={setUserProfileData}
         />

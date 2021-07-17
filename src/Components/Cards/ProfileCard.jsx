@@ -2,7 +2,7 @@ import styles from "./profileCard.module.css";
 import { authAxios } from "../../Utils/authAxios";
 import { useDispatch } from "react-redux";
 import { toggleFollow } from "../../features/User/userDataSlice";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 import { GeoAlt } from "react-bootstrap-icons";
@@ -32,6 +32,15 @@ const ProfileCard = ({
         toast("Some Error Occured, Refresh the page");
       });
   };
+
+  useEffect(() => {
+    console.log(
+      "USRE PROFFSDF ",
+      userProfileData,
+      "asfasfafs",
+      loggedInUserData
+    );
+  }, [userProfileData]);
 
   const toggleUserProfileFollower = () => {
     const checkIfAlreadyFollower = userProfileData.followers.find(
@@ -66,7 +75,14 @@ const ProfileCard = ({
 
   return (
     <div className={styles.profileContainer}>
-      <div className={styles.bannerContainer}></div>
+      <div
+        className={styles.bannerContainer}
+        style={{
+          background: userProfileData.wallColor
+            ? userProfileData.wallColor
+            : "",
+        }}
+      ></div>
       <div className={styles.avatarContainer}>
         <img
           className={styles.avatar}

@@ -3,6 +3,13 @@
   margin-top: 3rem;
   padding-bottom: 7rem;
 }
+.updateProfileOptions {
+  /* background: rgb(197, 127, 127); */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 @media only screen and (min-width: 620px) {
   .profilePage {
     width: 70%;

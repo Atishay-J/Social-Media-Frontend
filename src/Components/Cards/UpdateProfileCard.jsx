@@ -31,7 +31,7 @@ const UpdateProfileCard = ({ setShowUpdateProfile, setUserProfileData }) => {
           location,
         })
         .then((res) => {
-          toastSuccess("Profile Updated");
+          return toastSuccess("Profile Updated");
         })
         .catch((err) => {
           console.log("Error While Updating Profile", err);
