@@ -3,6 +3,7 @@ import { authAxios } from "../../Utils/authAxios";
 import styles from "./profileCard.module.css";
 import { XCircleFill } from "react-bootstrap-icons";
 import { toastDark, toastSuccess } from "../../Utils/toastMessage";
+import UpdatePassword from "./UpdatePasswordCard";
 
 const UpdateProfileCard = ({ setShowUpdateProfile, setUserProfileData }) => {
   const [{ firstname, lastname, bio, location }, setUserInput] = useState({
@@ -112,10 +113,10 @@ const UpdateProfileCard = ({ setShowUpdateProfile, setUserProfileData }) => {
           placeholder="Location"
         />
       </div>
-
       <button className={styles.updateProfileBtn} onClick={updateProfile}>
         Update
       </button>
+      <UpdatePassword styles={styles} />
     </div>
   );
 };
