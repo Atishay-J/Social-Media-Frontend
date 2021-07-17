@@ -80,6 +80,18 @@ export const postSlice = createSlice({
 
       state.posts = [...remainingPosts, foundPost];
     },
+    deletePost: (state, action) => {
+      let foundPost = state.posts.find(
+        (post) => post._id === action.payload.postId
+      );
+
+      if (foundPost.userId === action.payload.userId) {
+        let remainingPosts = state.posts.filter(
+          (post) => post._id !== action.payload.postId
+        );
+        state.posts = [...remainingPosts];
+      }
+    },
   },
   extraReducers: {
     [uploadPost.pending]: (state, action) => {
@@ -107,6 +119,6 @@ export const postSlice = createSlice({
   },
 });
 
-export const { togglePostLike } = postSlice.actions;
+export const { togglePostLike, deletePost } = postSlice.actions;
 
 export default postSlice.reducer;

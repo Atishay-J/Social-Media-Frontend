@@ -1,8 +1,13 @@
-import { Heart, Chat, HeartFill } from "react-bootstrap-icons";
+import {
+  Heart,
+  Chat,
+  HeartFill,
+  ThreeDotsVertical,
+} from "react-bootstrap-icons";
 import { authAxios } from "../../Utils/authAxios";
 import useTimeAgo from "../../hooks/useTimeAgo";
 import { useDispatch } from "react-redux";
-import { togglePostLike } from "../../features/post/postSlice";
+import { togglePostLike, deletePost } from "../../features/post/postSlice";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -25,6 +30,7 @@ const PostCard = ({
 }) => {
   const { loggedInUserData } = useSelector((state) => state.userData);
   const [parsedPost, setParsedPost] = useState("");
+  const [showDeleteOption, setShowDeleteOption] = useState(false);
 
   const [liked, setLiked] = useState(false);
 
@@ -32,7 +38,6 @@ const PostCard = ({
 
   let username = loggedInUserData.username;
   let userId = loggedInUserData._id;
-
   let numberOfLikes = postLikes.length;
   let numberOfComments = postComments.length;
 
@@ -51,7 +56,13 @@ const PostCard = ({
       .then((res) => console.log("Handle Axios Like "))
       .catch((err) => console.log("Handle axios like error", err));
   };
-
+  const deleteCurrentPost = async () => {
+    dispatch(deletePost({ postId, userId }));
+    await authAxios
+      .post("/post/delete", { postId, userId })
+      .then((res) => console.log("New REsponse ", res))
+      .catch((err) => console.log("ErRRORR ", err));
+  };
   useEffect(() => {
     let alreadyLiked = postLikes.find((user) => user === username);
 
@@ -92,9 +103,21 @@ const PostCard = ({
 
           <div className={styles.postTimeWrapper}>
             <h2 className={styles.postUsername}>{postUsername}</h2>
-
             <span className={styles.postTime}>{timeAgo} ago</span>
           </div>
+        </div>
+        <div className={styles.deletePostWrapper}>
+          <div
+            className={styles.deletePost}
+            style={{ display: showDeleteOption ? "flex" : "none" }}
+            onClick={deleteCurrentPost}
+          >
+            <h4 className={styles.deletePostText}>Delete</h4>
+          </div>
+          <ThreeDotsVertical
+            className={styles.deletePostIcon}
+            onClick={() => setShowDeleteOption((prev) => !prev)}
+          />
         </div>
       </div>
       <div className={styles.postBodyContainer}>{parsedPost}</div>

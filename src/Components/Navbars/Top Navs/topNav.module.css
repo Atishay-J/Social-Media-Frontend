@@ -60,4 +60,11 @@
 .logoutText {
   font-size: 0.8rem;
   font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.logoutIcon {
+  font-size: 0.9rem;
+  margin-left: 0.5rem;
 }

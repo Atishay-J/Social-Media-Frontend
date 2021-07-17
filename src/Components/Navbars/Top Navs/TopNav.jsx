@@ -39,8 +39,9 @@ const TopNav = () => {
           style={{ display: showLogoutBtn ? "flex" : "none" }}
           onClick={logout}
         >
-          <h3 className={styles.logoutText}>Logout</h3>
-          <BoxArrowRight className={styles.logoutIcon} />
+          <h3 className={styles.logoutText}>
+            Logout <BoxArrowRight className={styles.logoutIcon} />
+          </h3>
         </div>
       </div>
     </div>
