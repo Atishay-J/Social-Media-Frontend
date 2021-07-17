@@ -106,19 +106,21 @@ const PostCard = ({
             <span className={styles.postTime}>{timeAgo} ago</span>
           </div>
         </div>
-        <div className={styles.deletePostWrapper}>
-          <div
-            className={styles.deletePost}
-            style={{ display: showDeleteOption ? "flex" : "none" }}
-            onClick={deleteCurrentPost}
-          >
-            <h4 className={styles.deletePostText}>Delete</h4>
+        {postAuthorId === userId && (
+          <div className={styles.deletePostWrapper}>
+            <div
+              className={styles.deletePost}
+              style={{ display: showDeleteOption ? "flex" : "none" }}
+              onClick={deleteCurrentPost}
+            >
+              <h4 className={styles.deletePostText}>Delete</h4>
+            </div>
+            <ThreeDotsVertical
+              className={styles.deletePostIcon}
+              onClick={() => setShowDeleteOption((prev) => !prev)}
+            />
           </div>
-          <ThreeDotsVertical
-            className={styles.deletePostIcon}
-            onClick={() => setShowDeleteOption((prev) => !prev)}
-          />
-        </div>
+        )}
       </div>
       <div className={styles.postBodyContainer}>{parsedPost}</div>
       {postImg && (
