@@ -7,7 +7,7 @@ import { uploadPost } from "../../features/post/postSlice";
 import { IKImage, IKContext, IKUpload } from "imagekitio-react";
 import { Upload } from "react-bootstrap-icons";
 import { toast } from "react-toastify";
-
+import Skeleton from "react-loading-skeleton";
 import styles from "./createPost.module.css";
 
 const CreatePost = () => {
@@ -16,6 +16,7 @@ const CreatePost = () => {
   );
   const [imageUploadUrl, setImageUploadUrl] = useState("");
   const [showUploadBtn, setShowUploadBtn] = useState(false);
+  const [showImageLoader, setImageLoader] = useState(false);
 
   const { loggedInUserData } = useSelector((state) => state.userData);
 
@@ -63,6 +64,7 @@ const CreatePost = () => {
 
   const onSuccess = (res) => {
     setImageUploadUrl(res.url);
+    setImageLoader(false);
   };
 
   return (
@@ -87,6 +89,7 @@ const CreatePost = () => {
             {showUploadBtn ? (
               <IKUpload
                 className={styles.imageKitUpload}
+                onChange={() => setImageLoader(true)}
                 onError={onError}
                 onSuccess={onSuccess}
                 useUniqueFileName={true}
@@ -103,8 +106,17 @@ const CreatePost = () => {
               Post
             </button>
           </div>
-          {imageUploadUrl && (
-            <IKImage className={styles.uploadedImage} src={imageUploadUrl} />
+          {showImageLoader ? (
+            <Skeleton
+              height={100}
+              style={{ marginTop: "2rem", borderRadius: "20px" }}
+            />
+          ) : (
+            <IKImage
+              className={styles.uploadedImage}
+              style={{ display: imageUploadUrl ? "block" : "none" }}
+              src={imageUploadUrl}
+            />
           )}
         </IKContext>
       </div>

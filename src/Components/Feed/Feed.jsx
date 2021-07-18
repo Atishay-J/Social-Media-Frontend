@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import PostCard from "../Cards/PostCard";
 import { fetchAllPosts } from "../../features/post/postSlice";
 import useSortByTime from "../../hooks/useSortByTime";
+import PostLoaderCard from "../Cards/PostLoaderCard";
 
 const Feed = () => {
   const [userFeed, setUserFeed] = useState([]);
@@ -21,17 +22,11 @@ const Feed = () => {
         );
       });
 
-      console.log("POSTT", post);
-
-      return setUserFeed((prev) => [...post]);
+      return setUserFeed(() => [...post]);
     });
   };
 
   const dispatch = useDispatch();
-
-  console.log("Posts", posts);
-
-  // const sortedFeed = useSortByTime(posts);
 
   const sortedFeed = useSortByTime(userFeed);
 
@@ -49,9 +44,7 @@ const Feed = () => {
 
   return (
     <div className="postsContainer" style={{ paddingBottom: "5rem" }}>
-      {postStatus === "loading" && (
-        <h1 className="loadingStatus">Loading...</h1>
-      )}
+      {postStatus === "loading" && <PostLoaderCard />}
       {uploadStatus === "loading" && (
         <h1 className="loadingStatus">Uploading...</h1>
       )}
