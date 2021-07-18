@@ -3,7 +3,7 @@
   width: 100%;
   background: #d80238;
 
-  border-radius: 15px 15px 0 0;
+  /* border-radius: 15px 15px 0 0; */
 }
 .avatarContainer {
   margin-top: -2rem;
@@ -175,5 +175,8 @@
   .updateProfileContainer {
     /* background: red; */
     width: 40%;
+  }
+  .bannerContainer {
+    border-radius: 15px 15px 0 0;
   }
 }

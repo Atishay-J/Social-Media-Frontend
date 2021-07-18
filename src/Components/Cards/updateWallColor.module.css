@@ -9,10 +9,22 @@
   margin-top: 2rem;
   /* align-items: center; */
 }
+.headingWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 .heading {
   font-size: 1.2rem;
   font-weight: 300;
 }
+.closeIconWrapper {
+  display: flex;
+  color: var(--primary-Col);
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
 .profileContainer {
   width: 80%;
   height: 8rem;

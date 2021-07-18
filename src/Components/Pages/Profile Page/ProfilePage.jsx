@@ -32,9 +32,6 @@ const ProfilePage = () => {
   } = useSelector((state) => state.userData);
   const { posts, postStatus } = useSelector((state) => state.posts);
 
-  console.log("logged in User data", loggedInUserData);
-  console.log("USER DATAT", userData);
-
   const { username } = useParams();
   const dispatch = useDispatch();
 

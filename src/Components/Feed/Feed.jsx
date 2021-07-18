@@ -50,23 +50,36 @@ const Feed = () => {
       )}
       {postStatus === "fulfilled" && (
         <>
-          {sortedFeed?.map((postData) => (
-            <PostCard
-              // key={`${postData._id}post`}
-              key={postData._id}
-              postUsername={postData.username}
-              postFirstname={postData.firstname}
-              postLastname={postData.lastname}
-              postAuthorId={postData.userId}
-              avatar={postData.avatar}
-              post={postData.postContent}
-              postTime={postData.createdAt}
-              postId={postData._id}
-              postLikes={postData.likes}
-              postComments={postData.comments}
-              postImg={postData.postImg}
-            />
-          ))}
+          {sortedFeed.length ? (
+            sortedFeed.map((postData) => (
+              <PostCard
+                // key={`${postData._id}post`}
+                key={postData._id}
+                postUsername={postData.username}
+                postFirstname={postData.firstname}
+                postLastname={postData.lastname}
+                postAuthorId={postData.userId}
+                avatar={postData.avatar}
+                post={postData.postContent}
+                postTime={postData.createdAt}
+                postId={postData._id}
+                postLikes={postData.likes}
+                postComments={postData.comments}
+                postImg={postData.postImg}
+              />
+            ))
+          ) : (
+            <h3
+              style={{
+                fontSize: "0.9rem",
+                textAlign: "center",
+                marginTop: "4rem",
+                color: "var(--font-Gray)",
+              }}
+            >
+              Start following people to see the posts
+            </h3>
+          )}
         </>
       )}
     </div>

@@ -5,6 +5,10 @@ import SearchCard from "../../Cards/SearchCard";
 import styles from "./searchPage.module.css";
 import { Search } from "react-bootstrap-icons";
 import TopNav from "../../Navbars/Top Navs/TopNav";
+import useSortByTime from "../../../hooks/useSortByTime";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchAllPosts } from "../../../features/post/postSlice";
+import PostCard from "../../Cards/PostCard";
 
 const SearchPage = () => {
   const [userInput, setUserInput] = useState("");
@@ -12,6 +16,9 @@ const SearchPage = () => {
     status: "idle",
     data: "",
   });
+  const { posts, postStatus } = useSelector((state) => state.posts);
+
+  const dispatch = useDispatch();
 
   const searchUser = async () => {
     setSearchResults({ data: "", status: "loading" });
@@ -26,8 +33,16 @@ const SearchPage = () => {
       });
   };
 
+  const sortedFeed = useSortByTime(posts);
+
   useEffect(() => {
     setSearchResults({ status: "idle", data: "" });
+  }, []);
+
+  useEffect(() => {
+    if (postStatus === "idle") {
+      dispatch(fetchAllPosts());
+    }
   }, []);
 
   return (
@@ -65,7 +80,30 @@ const SearchPage = () => {
           )}
           {searchResults.status === "error" && <h3>User does not Exist</h3>}
         </div>
+
+        <div className={styles.exploreContainer}>
+          <h4 className={styles.exploreText}>Trending in Community </h4>
+          <div className={styles.exploreFeedWrapper}>
+            {sortedFeed.map((postData) => (
+              <PostCard
+                key={postData._id}
+                postUsername={postData.username}
+                postFirstname={postData.firstname}
+                postLastname={postData.lastname}
+                postAuthorId={postData.userId}
+                avatar={postData.avatar}
+                post={postData.postContent}
+                postTime={postData.createdAt}
+                postId={postData._id}
+                postLikes={postData.likes}
+                postComments={postData.comments}
+                postImg={postData.postImg}
+              />
+            ))}
+          </div>
+        </div>
       </div>
+
       <BottomNav />
     </>
   );

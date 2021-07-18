@@ -47,6 +47,22 @@
   text-align: center;
 }
 
+.exploreContainer {
+  width: 80%;
+  margin-top: 3.5rem;
+  /* background: #000; */
+}
+.exploreText {
+  text-align: center;
+  font-size: 1.3rem;
+}
+.exploreFeedWrapper {
+  /* background: #000; */
+  /* margin-top: 1rem; */
+  display: flex;
+  flex-wrap: wrap;
+}
+
 @media only screen and (min-width: 620px) {
   .searchPageContainer {
     width: 80%;

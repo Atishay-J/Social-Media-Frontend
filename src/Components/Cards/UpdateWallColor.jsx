@@ -1,7 +1,14 @@
 import { useState } from "react";
 import styles from "./updateWallColor.module.css";
 import { authAxios } from "../../Utils/authAxios";
-const UpdateWallColor = ({ userProfileData, setUserProfileData }) => {
+import { XCircleFill } from "react-bootstrap-icons";
+import { toastDark } from "../../Utils/toastMessage";
+import { toast } from "react-toastify";
+const UpdateWallColor = ({
+  userProfileData,
+  setUserProfileData,
+  setShowUpdateProfile,
+}) => {
   const [currentWallColor, setCurrentWallColor] = useState("");
 
   const colors = [
@@ -19,8 +26,8 @@ const UpdateWallColor = ({ userProfileData, setUserProfileData }) => {
 
     await authAxios
       .post("/updateprofile", { wallColor: color })
-      .then((res) => console.log("Response savee", res))
-      .catch((err) => console.log("ERROR ", err));
+      .then((res) => console.log("Wall Updated"))
+      .catch((err) => toastDark("some Error Occured,Reload the page"));
 
     setUserProfileData((prevState) => {
       return { ...prevState, wallColor: color };
@@ -29,7 +36,16 @@ const UpdateWallColor = ({ userProfileData, setUserProfileData }) => {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.heading}>Change how your wall looks</h1>
+      <div className={styles.headingWrapper}>
+        <h3 className={styles.heading}>Edit Profile</h3>
+
+        <div
+          className={styles.closeIconWrapper}
+          onClick={() => setShowUpdateProfile(false)}
+        >
+          <XCircleFill />
+        </div>
+      </div>
       <div className={styles.profileContainer}>
         <div
           className={styles.wall}

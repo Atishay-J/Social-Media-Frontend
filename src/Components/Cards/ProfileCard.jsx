@@ -33,15 +33,6 @@ const ProfileCard = ({
       });
   };
 
-  useEffect(() => {
-    console.log(
-      "USRE PROFFSDF ",
-      userProfileData,
-      "asfasfafs",
-      loggedInUserData
-    );
-  }, [userProfileData]);
-
   const toggleUserProfileFollower = () => {
     const checkIfAlreadyFollower = userProfileData.followers.find(
       (follower) => follower === loggedInUserData.username

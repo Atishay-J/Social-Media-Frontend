@@ -1,5 +1,6 @@
 import UpdateProfileCard from "../../Cards/UpdateProfileCard";
 import UpdateWallColor from "../../Cards/UpdateWallColor";
+
 import styles from "./profilePage.module.css";
 const UpdateProfileOptions = ({
   setShowUpdateProfile,
@@ -11,6 +12,7 @@ const UpdateProfileOptions = ({
       <UpdateWallColor
         userProfileData={userProfileData}
         setUserProfileData={setUserProfileData}
+        setShowUpdateProfile={setShowUpdateProfile}
       />
       <UpdateProfileCard
         setShowUpdateProfile={setShowUpdateProfile}
