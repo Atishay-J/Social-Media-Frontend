@@ -1,8 +1,8 @@
 import axios from "axios";
 
-// const apiURL = "https://socialmetaphor.herokuapp.com";
+const apiURL = "https://socialmetaphor.herokuapp.com";
 
-const apiURL = "http://localhost:8000";
+// const apiURL = "http://localhost:8000";
 
 const token = localStorage.getItem("token");
 
