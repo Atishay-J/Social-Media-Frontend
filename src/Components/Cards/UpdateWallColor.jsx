@@ -1,11 +1,8 @@
 import { useState } from "react";
 import styles from "./updateWallColor.module.css";
-import { updateWallColor } from "../../features/User/userDataSlice";
-import { useDispatch } from "react-redux";
 import { authAxios } from "../../Utils/authAxios";
 const UpdateWallColor = ({ userProfileData, setUserProfileData }) => {
   const [currentWallColor, setCurrentWallColor] = useState("");
-  const dispatch = useDispatch();
 
   const colors = [
     { color: "#d80238", name: "Default" },
@@ -19,7 +16,6 @@ const UpdateWallColor = ({ userProfileData, setUserProfileData }) => {
 
   const setNewColor = async (color) => {
     setCurrentWallColor(color);
-    // dispatch(updateWallColor({ wallColor: color }));
 
     await authAxios
       .post("/updateprofile", { wallColor: color })

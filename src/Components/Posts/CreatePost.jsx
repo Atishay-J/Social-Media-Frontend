@@ -23,11 +23,13 @@ const CreatePost = () => {
 
   const createPost = () => {
     let postContent = editorState.getCurrentContent().getPlainText();
-    let username = loggedInUserData.username;
-    let firstname = loggedInUserData.firstname;
-    let lastname = loggedInUserData.lastname;
-    let avatar = loggedInUserData.avatar;
-    let userId = loggedInUserData._id;
+    let {
+      username,
+      firstname,
+      lastname,
+      avatar,
+      _id: userId,
+    } = loggedInUserData;
 
     if (postContent || imageUploadUrl) {
       dispatch(
