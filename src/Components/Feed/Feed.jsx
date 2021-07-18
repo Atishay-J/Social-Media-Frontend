@@ -34,7 +34,7 @@ const Feed = () => {
     if (postStatus === "fulfilled" || uploadStatus === "fulfilled") {
       updateFeed();
     }
-  }, [postStatus, uploadStatus]);
+  }, [postStatus, uploadStatus, posts]);
 
   useEffect(() => {
     if (postStatus === "idle") {
