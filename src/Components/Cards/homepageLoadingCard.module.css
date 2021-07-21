@@ -1,0 +1,16 @@
+.homepageLoadingContainer {
+  height: 5rem;
+  width: 80%;
+  border-radius: 20px;
+  margin: auto;
+  margin-top: 1.5rem;
+  padding: 1rem 0.5rem 1rem 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: -1px 1px 45px -21px rgba(32, 32, 32, 0.486);
+}
+.button {
+  border-radius: 50px;
+  align-self: flex-end;
+  margin-right: 2rem;
+}

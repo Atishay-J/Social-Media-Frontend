@@ -7,6 +7,7 @@ import { resetLoggedInUserData } from "../../../features/User/userDataSlice";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 
 const TopNav = () => {
   const { loggedInUserData } = useSelector((state) => state.userData);
@@ -29,11 +30,17 @@ const TopNav = () => {
         className={styles.userProfile}
         onClick={() => setShowLogoutBtn((prev) => !prev)}
       >
-        <img
-          className={styles.avatar}
-          src={loggedInUserData.avatar}
-          alt="User Avatar"
-        />
+        {loggedInUserData.avatar ? (
+          <img
+            className={styles.avatar}
+            src={loggedInUserData.avatar}
+            alt="User Avatar"
+          />
+        ) : (
+          <SkeletonTheme color="#202020" highlightColor="#444">
+            <Skeleton circle={true} width={30} height={30} />
+          </SkeletonTheme>
+        )}
         <div
           className={styles.logoutWrapper}
           style={{ display: showLogoutBtn ? "flex" : "none" }}

@@ -1,0 +1,16 @@
+.notificationLoadingContainer {
+  margin: auto;
+  margin-top: 2rem;
+  width: 90%;
+  height: 6rem;
+  display: flex;
+  align-items: center;
+  padding: 0.3rem 0.3rem 0.3rem 0.8rem;
+  box-shadow: -1px 1px 45px -21px rgba(32, 32, 32, 0.486);
+  border-radius: 20px;
+}
+.userInfo {
+  margin-left: 2rem;
+  display: flex;
+  flex-direction: column;
+}

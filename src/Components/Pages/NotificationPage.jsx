@@ -3,9 +3,11 @@ import { authAxios } from "../../Utils/authAxios";
 import BottomNav from "../Navbars/Bottom Navs/BottomNav";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import NotificatinLoadingCard from "../Cards/NotificationLoadingCard";
 import NotificationCard from "../Cards/NotificationCard";
 import TopNav from "../Navbars/Top Navs/TopNav";
 import useSortByTime from "../../hooks/useSortByTime";
+
 import styles from "./notification.module.css";
 
 const NotificationPage = () => {
@@ -49,7 +51,7 @@ const NotificationPage = () => {
     <>
       <TopNav />
       <div className={styles.notificationPageContainer}>
-        {notifications.status === "loading" && <h2>Loading...</h2>}
+        {notifications.status === "loading" && <NotificatinLoadingCard />}
         {notifications.status === "fulfilled" &&
           (sortedByTime.length ? (
             sortedByTime.map((notification) => (

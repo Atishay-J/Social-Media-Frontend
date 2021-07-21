@@ -1,5 +1,6 @@
 import TopNav from "../Navbars/Top Navs/TopNav";
 import BottomNav from "../Navbars/Bottom Navs/BottomNav";
+import HomepageLoadingCard from "../Cards/HomepageLoadingCard";
 import Feed from "../Feed/Feed";
 import CreatePost from "../Posts/CreatePost";
 import styles from "./hompage.module.css";
@@ -13,7 +14,7 @@ const Homepage = () => {
     <>
       <TopNav />
       <div className={styles.homepage}>
-        {loggedInUserStatus === "loading" && <h2>Loading...</h2>}
+        {loggedInUserStatus === "loading" && <HomepageLoadingCard />}
         {loggedInUserStatus === "fulfilled" && (
           <>
             <CreatePost />
