@@ -47,7 +47,7 @@ const UpdateProfileCard = ({ setShowUpdateProfile, setUserProfileData }) => {
           location,
         };
       });
-      setShowUpdateProfile(false);
+      return setShowUpdateProfile(false);
     }
     toastDark("Fields Can't be empty");
   };
