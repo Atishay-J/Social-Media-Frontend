@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { authAxios } from "../../Utils/authAxios";
-import BottomNav from "../Navbars/Bottom Navs/BottomNav";
+import { authAxios } from "../../../Utils/authAxios";
+import BottomNav from "../../Navbars/Bottom Navs/BottomNav";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { NotificationCard, NotificationLoadingCard } from "../Cards";
-import TopNav from "../Navbars/Top Navs/TopNav";
-import useSortByTime from "../../hooks/useSortByTime";
+import { NotificationCard, NotificationLoadingCard } from "../../Cards";
+import TopNav from "../../Navbars/Top Navs/TopNav";
+import useSortByTime from "../../../hooks/useSortByTime";
 
 import styles from "./notification.module.css";
 

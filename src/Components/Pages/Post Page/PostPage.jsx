@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router";
-import { authAxios } from "../../Utils/authAxios";
-import { PostCard, CommentCard } from "../Cards";
-import TopNav from "../Navbars/Top Navs/TopNav";
-import BottomNav from "../Navbars/Bottom Navs/BottomNav";
+import { authAxios } from "../../../Utils/authAxios";
+import { PostCard, CommentCard } from "../../Cards";
+import TopNav from "../../Navbars/Top Navs/TopNav";
+import BottomNav from "../../Navbars/Bottom Navs/BottomNav";
 import styles from "./postPage.module.css";
 
 const PostPage = () => {
