@@ -1,6 +1,6 @@
 import styles from "./notificationLoadingCard.module.css";
 import Skeleton from "react-loading-skeleton";
-const NotificatinLoadingCard = () => {
+const NotificationLoadingCard = () => {
   return (
     <>
       {Array(3)
@@ -21,4 +21,4 @@ const NotificatinLoadingCard = () => {
     </>
   );
 };
-export default NotificatinLoadingCard;
+export default NotificationLoadingCard;

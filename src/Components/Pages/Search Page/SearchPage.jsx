@@ -1,14 +1,13 @@
 import BottomNav from "../../Navbars/Bottom Navs/BottomNav";
 import { authAxios } from "../../../Utils/authAxios";
 import { useEffect, useState } from "react";
-import SearchCard from "../../Cards/SearchCard";
+import { SearchCard, PostCard } from "../../Cards";
 import styles from "./searchPage.module.css";
 import { Search } from "react-bootstrap-icons";
 import TopNav from "../../Navbars/Top Navs/TopNav";
 import useSortByTime from "../../../hooks/useSortByTime";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchAllPosts } from "../../../features/post/postSlice";
-import PostCard from "../../Cards/PostCard";
 
 const SearchPage = () => {
   const [userInput, setUserInput] = useState("");
@@ -76,6 +75,7 @@ const SearchPage = () => {
               lastname={searchResults.data.lastname}
               username={searchResults.data.username}
               bio={searchResults.data.bio}
+              styles={styles}
             />
           )}
           {searchResults.status === "error" && <h3>User does not Exist</h3>}

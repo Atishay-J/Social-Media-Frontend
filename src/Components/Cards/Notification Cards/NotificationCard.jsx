@@ -1,4 +1,4 @@
-import useTimeAgo from "../../hooks/useTimeAgo";
+import useTimeAgo from "../../../hooks/useTimeAgo";
 import styles from "./notificationCard.module.css";
 import { useNavigate } from "react-router-dom";
 

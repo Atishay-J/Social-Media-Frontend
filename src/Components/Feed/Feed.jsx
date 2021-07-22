@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import PostCard from "../Cards/PostCard";
+import { PostCard, PostLoaderCard } from "../Cards";
 import { fetchAllPosts } from "../../features/post/postSlice";
 import useSortByTime from "../../hooks/useSortByTime";
-import PostLoaderCard from "../Cards/PostLoaderCard";
 
 const Feed = () => {
   const [userFeed, setUserFeed] = useState([]);

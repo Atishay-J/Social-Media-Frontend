@@ -1,5 +1,4 @@
-import UpdateProfileCard from "../../Cards/UpdateProfileCard";
-import UpdateWallColor from "../../Cards/UpdateWallColor";
+import { UpdateProfileCard, UpdateWallColor } from "../../Cards";
 
 import styles from "./profilePage.module.css";
 const UpdateProfileOptions = ({

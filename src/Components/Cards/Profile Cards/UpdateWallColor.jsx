@@ -1,8 +1,8 @@
 import { useState } from "react";
 import styles from "./updateWallColor.module.css";
-import { authAxios } from "../../Utils/authAxios";
+import { authAxios } from "../../../Utils/authAxios";
 import { XCircleFill } from "react-bootstrap-icons";
-import { toastDark } from "../../Utils/toastMessage";
+import { toastDark } from "../../../Utils/toastMessage";
 import { toast } from "react-toastify";
 const UpdateWallColor = ({
   userProfileData,

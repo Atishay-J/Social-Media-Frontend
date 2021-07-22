@@ -1,7 +1,7 @@
 import styles from "./profileCard.module.css";
-import { authAxios } from "../../Utils/authAxios";
+import { authAxios } from "../../../Utils/authAxios";
 import { useDispatch } from "react-redux";
-import { toggleFollow } from "../../features/User/userDataSlice";
+import { toggleFollow } from "../../../features/User/userDataSlice";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 

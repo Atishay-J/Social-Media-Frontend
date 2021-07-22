@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router";
+import { useParams } from "react-router";
 import { authAxios } from "../../Utils/authAxios";
-import PostCard from "../Cards/PostCard";
-import CommentCard from "../Cards/CommentCard";
-import useSortByTime from "../../hooks/useSortByTime";
+import { PostCard, CommentCard } from "../Cards";
 import TopNav from "../Navbars/Top Navs/TopNav";
 import BottomNav from "../Navbars/Bottom Navs/BottomNav";
 import styles from "./postPage.module.css";
@@ -19,8 +17,6 @@ const PostPage = () => {
   });
 
   const { postId } = useParams();
-
-  const sortedByTime = useSortByTime();
 
   const fetchPost = async () => {
     setPostData({ status: "loading", data: "" });

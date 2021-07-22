@@ -1,11 +1,10 @@
 import { useSelector, useDispatch } from "react-redux";
 import BottomNav from "../../Navbars/Bottom Navs/BottomNav";
 import TopNav from "../../Navbars/Top Navs/TopNav";
-// import styles from "./profilePage.module.css";
+import styles from "./profilePage.module.css";
 import useSortByTime from "../../../hooks/useSortByTime";
-import PostCard from "../../Cards/PostCard";
-import ProfileCard from "../../Cards/ProfileCard";
-// import UpdateProfileCard from "../../Cards/UpdateProfileCard";
+import { PostCard, ProfileCard } from "../../Cards";
+
 import UpdateProfileOptions from "./UpdateProfileOptions";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -16,7 +15,6 @@ import {
   fetchUserData,
   resetUserData,
 } from "../../../features/User/userDataSlice";
-import styles from "./profilePage.module.css";
 
 const ProfilePage = () => {
   const [userProfileData, setUserProfileData] = useState("");

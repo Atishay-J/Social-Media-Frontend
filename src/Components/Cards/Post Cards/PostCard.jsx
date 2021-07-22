@@ -4,10 +4,10 @@ import {
   HeartFill,
   ThreeDotsVertical,
 } from "react-bootstrap-icons";
-import { authAxios } from "../../Utils/authAxios";
-import useTimeAgo from "../../hooks/useTimeAgo";
+import { authAxios } from "../../../Utils/authAxios";
+import useTimeAgo from "../../../hooks/useTimeAgo";
 import { useDispatch } from "react-redux";
-import { togglePostLike, deletePost } from "../../features/post/postSlice";
+import { togglePostLike, deletePost } from "../../../features/post/postSlice";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";

@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { authAxios } from "../../Utils/authAxios";
+import { authAxios } from "../../../Utils/authAxios";
 import styles from "./profileCard.module.css";
 import { XCircleFill } from "react-bootstrap-icons";
-import { toastDark, toastSuccess } from "../../Utils/toastMessage";
+import { toastDark, toastSuccess } from "../../../Utils/toastMessage";
 import UpdatePassword from "./UpdatePasswordCard";
 
 const UpdateProfileCard = ({ setShowUpdateProfile, setUserProfileData }) => {

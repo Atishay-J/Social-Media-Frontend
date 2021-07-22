@@ -1,6 +1,5 @@
-import styles from "../Pages/Search Page/searchPage.module.css";
 import { useNavigate } from "react-router-dom";
-const SearchCard = ({ avatar, firstname, lastname, bio, username }) => {
+const SearchCard = ({ avatar, firstname, lastname, bio, username, styles }) => {
   const navigate = useNavigate();
   return (
     <div

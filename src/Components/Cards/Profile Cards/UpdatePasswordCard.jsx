@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { toastDark } from "../../Utils/toastMessage";
-import { authAxios } from "../../Utils/authAxios";
+import { toastDark } from "../../../Utils/toastMessage";
+import { authAxios } from "../../../Utils/authAxios";
 
 const UpdatePassword = ({ styles }) => {
   const { loggedInUserData } = useSelector((state) => state.userData);
