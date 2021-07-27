@@ -9,7 +9,9 @@ const UpdateWallColor = ({
   setUserProfileData,
   setShowUpdateProfile,
 }) => {
-  const [currentWallColor, setCurrentWallColor] = useState("");
+  const [currentWallColor, setCurrentWallColor] = useState(
+    userProfileData.wallColor || ""
+  );
 
   const colors = [
     { color: "#d80238", name: "Default" },
@@ -32,12 +34,13 @@ const UpdateWallColor = ({
     setUserProfileData((prevState) => {
       return { ...prevState, wallColor: color };
     });
+    toastDark("Wall color updated");
   };
 
   return (
     <div className={styles.container}>
       <div className={styles.headingWrapper}>
-        <h3 className={styles.heading}>Edit Profile</h3>
+        <h3 className={styles.heading}>Update your wall</h3>
 
         <div
           className={styles.closeIconWrapper}
