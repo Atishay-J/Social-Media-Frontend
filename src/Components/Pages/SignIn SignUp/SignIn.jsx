@@ -20,6 +20,9 @@ const SignIn = () => {
 
   const dispatch = useDispatch();
   let navigate = useNavigate();
+  let guestPassword = process.env.REACT_APP_GUEST_PASSWORD;
+
+  console.log("guest pass", guestPassword);
 
   const signInUser = async (e) => {
     e.preventDefault();
@@ -42,6 +45,22 @@ const SignIn = () => {
     toastDark("One or more fields are empty");
   };
 
+  const loginGuest = async () => {
+    setShowLoader(true);
+    await authAxios
+      .post("/guestuser")
+      .then((res) => {
+        setShowLoader(false);
+        dispatch(signIn(res.data));
+        toastSuccess("Logged In");
+        navigate("/home");
+      })
+      .catch((err) => {
+        setShowLoader(false);
+        toastDark(err.response.data);
+      });
+  };
+
   return (
     <div className={styles.container}>
       <PageNavbar />
@@ -49,7 +68,12 @@ const SignIn = () => {
       <div className={styles.formWrapper}>
         {showLoader && <h3 className={styles.signInMsg}>signing you in...</h3>}
         <form className={styles.form} onSubmit={(e) => signInUser(e)}>
-          <h1 className={styles.formHeading}>Sign In</h1>
+          <div className={styles.headingWrapper}>
+            <h1 className={styles.formHeading}>Sign In</h1>
+            <h4 className={styles.skipSignin} onClick={loginGuest}>
+              Skip signin
+            </h4>
+          </div>
 
           <input
             className={styles.inputs}
