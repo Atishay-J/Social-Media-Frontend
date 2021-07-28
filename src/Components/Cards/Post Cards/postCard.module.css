@@ -69,12 +69,12 @@
 .postUsername {
   font-size: 0.9rem;
   font-weight: 500;
+  margin-right: 1rem;
   color: var(--font-Gray);
 }
 .postTime {
   font-size: 0.8rem;
   color: var(--font-Gray);
-  margin-left: 1rem;
 }
 .postImageContainer {
   max-width: 100%;
