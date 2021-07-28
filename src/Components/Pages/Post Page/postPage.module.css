@@ -47,6 +47,19 @@
   border-radius: 20px 20px 20px 20px;
   cursor: pointer;
 }
+.disabledCommentBtn {
+  width: 4rem;
+  height: 2rem;
+  align-self: flex-end;
+  margin-right: 0.3rem;
+  border: none;
+  width: 6rem;
+  font-weight: 600;
+  background: rgb(187, 87, 87);
+  /* background: transparent; */
+  color: var(--font-Color-White);
+  border-radius: 20px 20px 20px 20px;
+}
 .message {
   font-size: 1rem;
   margin-top: 3rem;

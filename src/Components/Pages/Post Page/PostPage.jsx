@@ -33,44 +33,46 @@ const PostPage = () => {
 
   const addComment = async () => {
     setCommentInput("");
-    setUploadComment({ status: "loading" });
-    setPostData((prev) => {
-      return {
-        ...prev,
-        data: {
-          ...prev.data,
-          comments: [
-            ...prev.data.comments,
-            {
-              userId: loggedInUserData._id,
-              avatar: loggedInUserData.avatar,
-              firstname: loggedInUserData.firstname,
-              lastname: loggedInUserData.lastname,
-              username: loggedInUserData.username,
-              comment: commentInput,
-            },
-          ],
-        },
-      };
-    });
-    await authAxios
-      .post("/post/addcomment", {
-        postId,
-        userId: loggedInUserData._id,
-        avatar: loggedInUserData.avatar,
-        firstname: loggedInUserData.firstname,
-        lastname: loggedInUserData.lastname,
-        username: loggedInUserData.username,
-        comment: commentInput,
-      })
-      .then((res) => {
-        setUploadComment({ status: "fulfilled", data: res.data });
-        // fetchPost();
-      })
-      .catch((err) => {
-        setUploadComment({ status: "error" });
-        toastDark("some Error occured, reload the page");
+    if (commentInput) {
+      setUploadComment({ status: "loading" });
+      setPostData((prev) => {
+        return {
+          ...prev,
+          data: {
+            ...prev.data,
+            comments: [
+              ...prev.data.comments,
+              {
+                userId: loggedInUserData._id,
+                avatar: loggedInUserData.avatar,
+                firstname: loggedInUserData.firstname,
+                lastname: loggedInUserData.lastname,
+                username: loggedInUserData.username,
+                comment: commentInput,
+              },
+            ],
+          },
+        };
       });
+      await authAxios
+        .post("/post/addcomment", {
+          postId,
+          userId: loggedInUserData._id,
+          avatar: loggedInUserData.avatar,
+          firstname: loggedInUserData.firstname,
+          lastname: loggedInUserData.lastname,
+          username: loggedInUserData.username,
+          comment: commentInput,
+        })
+        .then((res) => {
+          setUploadComment({ status: "fulfilled", data: res.data });
+          // fetchPost();
+        })
+        .catch((err) => {
+          setUploadComment({ status: "error" });
+          toastDark("some Error occured, reload the page");
+        });
+    }
   };
 
   useEffect(() => {
@@ -108,7 +110,12 @@ const PostPage = () => {
               placeholder="write a comment"
               onChange={(e) => setCommentInput(e.target.value)}
             />
-            <button className={styles.commentBtn} onClick={addComment}>
+            <button
+              className={
+                commentInput ? styles.commentBtn : styles.disabledCommentBtn
+              }
+              onClick={addComment}
+            >
               Comment
             </button>
           </div>
