@@ -6,6 +6,7 @@ import { PostCard, CommentCard } from "../../Cards";
 import TopNav from "../../Navbars/Top Navs/TopNav";
 import BottomNav from "../../Navbars/Bottom Navs/BottomNav";
 import styles from "./postPage.module.css";
+import { toastDark } from "../../../Utils/toastMessage";
 
 const PostPage = () => {
   const [commentInput, setCommentInput] = useState("");
@@ -33,6 +34,25 @@ const PostPage = () => {
   const addComment = async () => {
     setCommentInput("");
     setUploadComment({ status: "loading" });
+    setPostData((prev) => {
+      return {
+        ...prev,
+        data: {
+          ...prev.data,
+          comments: [
+            ...prev.data.comments,
+            {
+              userId: loggedInUserData._id,
+              avatar: loggedInUserData.avatar,
+              firstname: loggedInUserData.firstname,
+              lastname: loggedInUserData.lastname,
+              username: loggedInUserData.username,
+              comment: commentInput,
+            },
+          ],
+        },
+      };
+    });
     await authAxios
       .post("/post/addcomment", {
         postId,
@@ -45,10 +65,11 @@ const PostPage = () => {
       })
       .then((res) => {
         setUploadComment({ status: "fulfilled", data: res.data });
-        fetchPost();
+        // fetchPost();
       })
       .catch((err) => {
         setUploadComment({ status: "error" });
+        toastDark("some Error occured, reload the page");
       });
   };
 
