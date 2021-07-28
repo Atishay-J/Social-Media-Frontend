@@ -15,6 +15,7 @@ import {
   fetchUserData,
   resetUserData,
 } from "../../../features/User/userDataSlice";
+import ProfileLoadingCard from "../../Cards/Profile Cards/ProfileLoadingCard";
 
 const ProfilePage = () => {
   const [userProfileData, setUserProfileData] = useState("");
@@ -73,10 +74,11 @@ const ProfilePage = () => {
         />
       ) : (
         <div className={styles.container}>
-          {userProfileData.username ? (
-            <>
-              <TopNav />
-              <div className={styles.profilePage}>
+          <TopNav />
+
+          <div className={styles.profilePage}>
+            {userProfileData.username ? (
+              <>
                 <ProfileCard
                   userProfileData={userProfileData}
                   setUserProfileData={setUserProfileData}
@@ -104,12 +106,13 @@ const ProfilePage = () => {
                       />
                     ))}
                 </div>
-              </div>
-              <BottomNav />
-            </>
-          ) : (
-            <h2>Loading...</h2>
-          )}
+              </>
+            ) : (
+              <ProfileLoadingCard />
+            )}
+          </div>
+
+          <BottomNav />
         </div>
       )}
     </div>
