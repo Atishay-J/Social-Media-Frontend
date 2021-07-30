@@ -23,7 +23,7 @@ const IndexPage = () => {
           <h1>Welcome to the Social Metaphor</h1>
           <div className={styles.heroPara}>
             <h3>
-              Signup now <br />
+              Signin now <br />
               join the community
             </h3>
           </div>
@@ -36,9 +36,9 @@ const IndexPage = () => {
         />
         <button
           className={styles.signupBtn}
-          onClick={() => navigate("/signup")}
+          onClick={() => navigate("/signin")}
         >
-          Signup
+          Signin
         </button>
       </div>
     </div>
