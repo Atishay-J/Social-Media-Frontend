@@ -1,0 +1,36 @@
+.commentCard {
+  /* background: red; */
+  /* display: flex; */
+  width: 100%;
+  margin-top: 2.5rem;
+  box-shadow: -1px 1px 45px -21px rgba(32, 32, 32, 0.486);
+  border-radius: 20px;
+  padding: 1rem;
+}
+.infoWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.avatar {
+  width: 2.8rem;
+  border: 1px solid #7c7c7c;
+  border-radius: 50px;
+}
+.userInfo {
+  /* background: purple; */
+  margin-left: 1rem;
+}
+.fullname {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+.username {
+  font-size: 0.8rem;
+  color: var(--font-Gray);
+}
+.comment {
+  font-size: 1.05rem;
+  margin-top: 1rem;
+  margin-left: 1rem;
+}

@@ -1,0 +1,10 @@
+.editorStyle {
+  /* background: rgb(128, 28, 28); */
+  color: var(--font-Color);
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+}
+.hashtag {
+  color: var(--hastag-Color);
+}
