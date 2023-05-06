@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const apiURL = "https://socialmetaphor.herokuapp.com";
+const apiURL = process.env.REACT_APP_SERVER_URL;
 
 // const apiURL = "http://localhost:8000";
 

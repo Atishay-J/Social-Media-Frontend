@@ -129,7 +129,7 @@ const PostCard = ({
             publicKey={process.env.REACT_APP_IMAGE_KIT_PUBLIC_KEY}
             urlEndpoint={process.env.REACT_APP_IMAGE_KIT_URL_ENDPOINT}
             transformationPosition="path"
-            authenticationEndpoint="https://socialmetaphor.herokuapp.com/uploadimage"
+            authenticationEndpoint={`${process.env.REACT_APP_SERVER_URL}/uploadimage`}
           >
             <IKImage
               className={styles.imageKitImage}
